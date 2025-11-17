@@ -1,0 +1,103 @@
+/* Intro Splash - Congelados El Timón */
+#intro-splash {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(1200px 800px at 50% 50%, #f6f9ff 0%, #eaf2ff 35%, #cfe2ff 100%);
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+
+#intro-splash[hidden] {
+  display: none !important;
+}
+
+#intro-splash .intro-inner {
+  text-align: center;
+  padding: 24px;
+  max-width: 90vw;
+}
+
+#intro-splash .logo-ring {width: 200px;
+  height: 200px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  border: 4px solid rgba(0, 76, 153, 0.15);
+  display: grid;
+  place-items: center;
+  animation: ringSpin 1.4s ease-in-out infinite;
+}
+
+#intro-splash .logo-img {
+  width: 160px;
+  height: 160px;
+  display: block;
+  margin: 0 auto;
+  animation: wheelSpin 2.8s linear infinite;
+}
+
+#intro-splash .logo-text {
+  font-family: 'Story Script', cursive;
+  font-weight: 800;
+  font-size: 48px; /* Aumentado de 18px a 28px */
+  color: #004c99;
+  letter-spacing: 0.3px;
+  margin-top: 8px;
+}
+
+#intro-splash .intro-sub {
+  margin: 6px 0 14px;
+  color: #2a3a4a;
+  font-size: 30px; /* Aumentado de 14px a 18px */
+}
+
+#intro-splash .intro-skip {
+  border: 0;
+  padding: 12px 20px; /* Aumentado el padding para mejor legibilidad */
+  border-radius: 999px;
+  background: #004c99;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px; /* Añadido tamaño de fuente explícito */
+  box-shadow: 0 6px 18px rgba(0, 76, 153, 0.25);
+}
+
+#intro-splash.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes ringSpin {
+  0% {
+    transform: scale(0.92) rotate(0);
+    box-shadow: 0 0 0 0 rgba(0, 76, 153, 0.25);
+  }
+  50% {
+    transform: scale(1.02) rotate(180deg);
+    box-shadow: 0 0 0 14px rgba(0, 76, 153, 0);
+  }
+  100% {
+    transform: scale(0.92) rotate(360deg);
+    box-shadow: 0 0 0 0 rgba(0, 76, 153, 0);
+  }
+}
+
+@keyframes wheelSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #intro-splash .logo-ring {
+    animation: none;
+  }
+  #intro-splash .logo-img {
+    animation: none;
+  }
+  #intro-splash {
+    transition: none;
+  }
+}
