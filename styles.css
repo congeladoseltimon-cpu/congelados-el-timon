@@ -20,6 +20,7 @@
 }
 
 *{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 body{margin:0;background:var(--bg);color:var(--text);
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,'Apple Color Emoji','Segoe UI Emoji'}
 
@@ -31,6 +32,17 @@ header{
 }
 /* ===== HEADER RESPONSIVE PARA MÓVIL ===== */
 @media (max-width: 767px){
+  /* --- Ajustes móviles añadidos: forzar 2 filas sin desbordes --- */
+  header .btn .label{ display:none !important; }
+  header .btn .icon{ display:inline-block; margin:0 !important; }
+  /* Ajustes del botón de carrito: mostrar icono + contador con paréntesis */
+  #cartBtn{ padding-left:0.5rem !important; padding-right:0.5rem !important; }
+  #cartBtn .paren{ display:inline !important; }
+  #cartBtn #cartCount{ display:inline-block !important; min-width: 0.9em; text-align:center; }
+  /* Convertir 'Inicio' a icono en móvil para ahorrar ancho */
+  #homeBtn .label{ display:none !important; }
+  #homeBtn .icon{ display:inline-block; }
+
   /* Contenedor principal del header - ESTRICTO: 2 FILAS */
   header{
     flex-wrap: wrap !important;
@@ -312,6 +324,10 @@ header{
     font-size: 0.8rem !important;
     min-height: 38px !important;
   }
+/* Helper spans for button icons/labels */
+.btn .icon{ margin-right:.35rem; }
+.btn .label{ display:inline; }
+
   
   #homeBtn{
     padding: 0.45rem 0.7rem !important;
@@ -1396,4 +1412,10 @@ main, .banners-grid{ overflow: visible; }
 }
 @media (min-width: 1120px){
   #productGrid{ grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
+}
+
+
+/* Ocultar iconos añadidos en escritorio para mantener diseño original */
+@media (min-width:768px){
+  #homeBtn .icon, #profileBtn .icon{ display:none !important; }
 }
