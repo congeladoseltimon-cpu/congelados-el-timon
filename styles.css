@@ -40,14 +40,14 @@ header{
     justify-content: flex-start;
   }
   
-  /* ===== PRIMERA LÍNEA: Brand + Búsqueda ===== */
+  /* ===== PRIMERA LÍNEA: Brand + Búsqueda + Inicio ===== */
   
   /* Brand - Priorizar visibilidad del nombre */
   .brand{
     order: 1 !important;
     flex: 0 1 auto !important;
     min-width: 0;
-    max-width: 50% !important;
+    max-width: 40% !important;
     overflow: hidden;
   }
   header h1{
@@ -75,7 +75,7 @@ header{
     order: 2 !important;
     flex: 1 1 auto !important;
     min-width: 0;
-    max-width: 50% !important;
+    max-width: none !important;
     gap: 0.35rem !important;
     display: flex !important;
   }
@@ -97,31 +97,38 @@ header{
     white-space: nowrap;
   }
   
-  /* ===== SEGUNDA LÍNEA: Botones de navegación ===== */
-  /* Orden: Mis datos (3) → Categorías (4) → Cesta (5) → Inicio (6) */
-  
-  #profileBtn{
+  /* Inicio - Primera línea */
+  #homeBtn{
     order: 3 !important;
     flex-shrink: 0;
   }
+  
+  /* ===== SEGUNDA LÍNEA: Categorías + Mis datos + Cesta + Mis pedidos ===== */
+  
   #mobileCatsBtn{
     order: 4 !important;
     flex-shrink: 0;
   }
-  #cartBtn{
+  #profileBtn{
     order: 5 !important;
     flex-shrink: 0;
   }
-  #homeBtn{
+  #cartBtn{
     order: 6 !important;
     flex-shrink: 0;
+  }
+  #btn-orders{
+    order: 7 !important;
+    flex-shrink: 0;
+    display: inline-flex !important; /* Mostrar en móvil */
   }
   
   /* Asegurar que todos los botones de la segunda línea tengan flex-basis auto */
   #homeBtn,
   #profileBtn,
   #mobileCatsBtn,
-  #cartBtn{
+  #cartBtn,
+  #btn-orders{
     flex-basis: auto !important;
     width: auto !important;
   }
@@ -178,9 +185,6 @@ header{
   .howto{
     display: none !important;
   }
-  #btn-orders{
-    display: none !important; /* Ocultar "Mis pedidos" en móvil */
-  }
   .mobile-aside-bar #mobileCatsBtn{
     display: none !important;
   }
@@ -198,6 +202,45 @@ header{
   header .btn:active{
     transform: scale(0.98);
     opacity: 0.9;
+  }
+  
+  /* ===== TARJETAS DE PRODUCTOS EN MÓVIL ===== */
+  
+  /* Separación mínima entre imagen y texto */
+  .card .content{
+    padding: 0.5rem 0.75rem !important;
+    gap: 0.25rem !important;
+  }
+  
+  /* Precio + peso en la misma línea (ya está así en .buy-row) */
+  /* Botón "añadir" debajo de precio+peso */
+  .buy-row{
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.4rem !important;
+    margin-top: 0.3rem !important;
+  }
+  .buy-row .price-inline{
+    width: 100%;
+  }
+  .buy-row .add-btn{
+    width: 100% !important;
+    margin-top: 0.2rem;
+  }
+  
+  /* Corazón de favoritos pegado al margen superior izquierdo */
+  .favorite-btn{
+    position: absolute !important;
+    top: 8px !important;
+    left: 8px !important;
+    right: auto !important;
+    z-index: 6 !important; /* Por encima de badges */
+  }
+  
+  /* Ajustar badges para que no se solapen con el corazón */
+  .card .badge-wrap .badge{
+    top: 40px !important; /* Mover un poco más abajo para no solaparse con el corazón */
+    left: 8px !important;
   }
 }
 
