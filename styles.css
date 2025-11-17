@@ -31,115 +31,24 @@ header{
 }
 /* ===== HEADER RESPONSIVE PARA MÓVIL ===== */
 @media (max-width: 767px){
-  /* Contenedor principal del header */
+  /* Contenedor principal del header - ESTRICTO: 2 FILAS */
   header{
     flex-wrap: wrap !important;
     padding: 0.6rem 0.75rem !important;
     gap: 0.5rem !important;
-    align-items: center;
+    align-items: stretch;
     justify-content: flex-start;
   }
   
-  /* ===== PRIMERA LÍNEA: Brand + Búsqueda + Inicio ===== */
-  
-  /* Brand - Priorizar visibilidad del nombre */
-  .brand{
-    order: 1 !important;
-    flex: 0 1 auto !important;
-    min-width: 0;
-    max-width: 40% !important;
-    overflow: hidden;
-  }
-  header h1{
-    font-size: 1.4rem !important;
-    flex-shrink: 1;
-    min-width: 0;
-    margin: 0 !important;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.25;
-  }
-  .brand span{
-    font-size: 0.92em !important;
-  }
-  header h1 .brand-logo{
-    height: 1.1em !important;
-    width: auto;
-    margin-right: 0.3rem !important;
-    flex-shrink: 0;
-  }
-  
-  /* Búsqueda - Ocupar espacio restante en primera línea */
-  #search{
-    order: 2 !important;
-    flex: 1 1 auto !important;
-    min-width: 0;
-    max-width: none !important;
-    gap: 0.35rem !important;
-    display: flex !important;
-  }
-  #search input{
-    flex: 1 1 auto;
-    min-width: 0;
-    font-size: 0.875rem !important;
-    padding: 0.5rem 0.65rem !important;
-    min-height: 36px;
-    border: 1px solid var(--border);
-    border-radius: 0.5rem;
-  }
+  /* ===== ALTURA UNIFORME PARA TODOS LOS BOTONES ===== */
+  header .btn,
   #search button{
-    flex-shrink: 0;
-    font-size: 0.8rem !important;
-    padding: 0.5rem 0.75rem !important;
-    min-height: 36px;
-    min-width: 60px;
-    white-space: nowrap;
-  }
-  
-  /* Inicio - Primera línea */
-  #homeBtn{
-    order: 3 !important;
-    flex-shrink: 0;
-  }
-  
-  /* ===== SEGUNDA LÍNEA: Categorías + Mis datos + Cesta + Mis pedidos ===== */
-  
-  #mobileCatsBtn{
-    order: 4 !important;
-    flex-shrink: 0;
-  }
-  #profileBtn{
-    order: 5 !important;
-    flex-shrink: 0;
-  }
-  #cartBtn{
-    order: 6 !important;
-    flex-shrink: 0;
-  }
-  #btn-orders{
-    order: 7 !important;
-    flex-shrink: 0;
-    display: inline-flex !important; /* Mostrar en móvil */
-  }
-  
-  /* Asegurar que todos los botones de la segunda línea tengan flex-basis auto */
-  #homeBtn,
-  #profileBtn,
-  #mobileCatsBtn,
-  #cartBtn,
-  #btn-orders{
-    flex-basis: auto !important;
-    width: auto !important;
-  }
-  
-  /* ===== ESTILOS DE BOTONES - Tamaño mínimo para usabilidad (44x44px recomendado) ===== */
-  header .btn{
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
     padding: 0.5rem 0.75rem !important;
     font-size: 0.85rem !important;
     white-space: nowrap;
-    min-height: 40px !important; /* Mínimo para usabilidad táctil */
-    height: auto;
     line-height: 1.3;
     display: inline-flex !important;
     align-items: center;
@@ -149,33 +58,109 @@ header{
     transition: all 0.2s ease;
     box-sizing: border-box;
     margin: 0;
-    /* Mejorar contraste y legibilidad */
     font-weight: 500;
     letter-spacing: 0.01em;
-    position: relative; /* Para área táctil extendida si es necesario */
   }
   
-  /* Botones específicos con ajustes individuales */
-  #homeBtn{
-    padding: 0.5rem 0.85rem !important;
-    font-size: 0.85rem !important;
-    min-width: auto;
+  /* ===== PRIMERA FILA: Logo + Texto + Buscar + Inicio ===== */
+  
+  /* Brand - Logo + Texto "Congelados El Timón" */
+  .brand{
+    order: 1 !important;
+    flex: 0 1 auto !important;
+    min-width: 0;
+    max-width: calc(35% - 0.25rem) !important;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    height: 40px !important;
+  }
+  header h1{
+    font-size: 1.2rem !important;
+    flex-shrink: 1;
+    min-width: 0;
+    margin: 0 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  .brand span{
+    font-size: 0.85em !important;
+  }
+  header h1 .brand-logo{
+    height: 1em !important;
     width: auto;
+    margin-right: 0.3rem !important;
+    flex-shrink: 0;
   }
   
-  #profileBtn{
-    padding: 0.5rem 0.75rem !important;
-    font-size: 0.85rem !important;
+  /* Búsqueda - Campo más compacto */
+  #search{
+    order: 2 !important;
+    flex: 1 1 auto !important;
+    min-width: 0;
+    max-width: calc(40% - 0.25rem) !important;
+    gap: 0.3rem !important;
+    display: flex !important;
+    height: 40px !important;
   }
+  #search input{
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 0.8rem !important;
+    padding: 0.4rem 0.5rem !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+  }
+  #search button{
+    flex-shrink: 0;
+    font-size: 0.75rem !important;
+    padding: 0.4rem 0.6rem !important;
+    min-width: 55px;
+    white-space: nowrap;
+  }
+  
+  /* Inicio - Primera fila */
+  #homeBtn{
+    order: 3 !important;
+    flex-shrink: 0;
+  }
+  
+  /* ===== SEGUNDA FILA: Categorías + Mis datos + Mis pedidos + Cesta ===== */
   
   #mobileCatsBtn{
-    padding: 0.5rem 0.75rem !important;
-    font-size: 0.85rem !important;
+    order: 4 !important;
+    flex-shrink: 0;
+  }
+  #profileBtn{
+    order: 5 !important;
+    flex-shrink: 0;
+  }
+  #btn-orders{
+    order: 6 !important;
+    flex-shrink: 0;
+    display: inline-flex !important;
+  }
+  #cartBtn{
+    order: 7 !important;
+    flex-shrink: 0;
   }
   
-  #cartBtn{
-    padding: 0.5rem 0.75rem !important;
-    font-size: 0.85rem !important;
+  /* Forzar salto de línea después de la primera fila usando pseudo-elemento */
+  header::after{
+    content: '';
+    flex-basis: 100%;
+    width: 100%;
+    order: 3.5;
+    height: 0;
   }
   
   /* ===== ELEMENTOS OCULTOS EN MÓVIL ===== */
@@ -187,15 +172,6 @@ header{
   }
   .mobile-aside-bar #mobileCatsBtn{
     display: none !important;
-  }
-  
-  /* ===== MEJORAS DE ESPACIADO Y PREVENCIÓN DE SOLAPAMIENTOS ===== */
-  /* Asegurar que la segunda línea se ajuste correctamente */
-  header::after{
-    content: '';
-    flex-basis: 100%;
-    width: 0;
-    order: 999;
   }
   
   /* Hover states mejorados para móvil */
