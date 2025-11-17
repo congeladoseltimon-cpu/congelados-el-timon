@@ -34,10 +34,24 @@ header{
   /* Contenedor principal del header - ESTRICTO: 2 FILAS */
   header{
     flex-wrap: wrap !important;
-    padding: 0.6rem 0.75rem !important;
-    gap: 0.5rem !important;
+    padding: 0.5rem 0.6rem !important; /* Padding más compacto */
+    gap: 0.4rem !important; /* Gap más pequeño */
     align-items: stretch;
     justify-content: flex-start;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+  }
+  
+  /* Asegurar compatibilidad con iPhone real */
+  @supports (-webkit-touch-callout: none) {
+    header{
+      box-sizing: border-box !important;
+      -webkit-box-sizing: border-box !important;
+      flex-wrap: wrap !important;
+      -webkit-flex-wrap: wrap !important;
+    }
   }
   
   /* ===== ALTURA UNIFORME PARA TODOS LOS BOTONES ===== */
@@ -46,7 +60,7 @@ header{
     height: 40px !important;
     min-height: 40px !important;
     max-height: 40px !important;
-    padding: 0.5rem 0.75rem !important;
+    padding: 0.4rem 0.5rem !important; /* Comprimido al máximo al texto */
     font-size: 0.85rem !important;
     white-space: nowrap;
     line-height: 1.3;
@@ -62,6 +76,13 @@ header{
     letter-spacing: 0.01em;
   }
   
+  /* Botón de categorías solo con emoji - más compacto */
+  #mobileCatsBtn{
+    padding: 0.4rem 0.5rem !important;
+    min-width: 40px !important;
+    width: auto !important;
+  }
+  
   /* ===== PRIMERA FILA: Logo + Texto + Buscar + Inicio ===== */
   
   /* Brand - Logo + Texto "Congelados El Timón" */
@@ -69,11 +90,12 @@ header{
     order: 1 !important;
     flex: 0 1 auto !important;
     min-width: 0;
-    max-width: calc(35% - 0.25rem) !important;
+    max-width: calc(32% - 0.2rem) !important; /* Más compacto */
     overflow: hidden;
     display: flex;
     align-items: center;
     height: 40px !important;
+    flex-shrink: 1;
   }
   header h1{
     font-size: 1.2rem !important;
@@ -103,10 +125,11 @@ header{
     order: 2 !important;
     flex: 1 1 auto !important;
     min-width: 0;
-    max-width: calc(40% - 0.25rem) !important;
-    gap: 0.3rem !important;
+    max-width: calc(45% - 0.2rem) !important; /* Ajustado para iPhone */
+    gap: 0.25rem !important;
     display: flex !important;
     height: 40px !important;
+    flex-shrink: 1;
   }
   #search input{
     flex: 1 1 auto;
@@ -132,6 +155,7 @@ header{
   #homeBtn{
     order: 3 !important;
     flex-shrink: 0;
+    flex-grow: 0;
   }
   
   /* ===== SEGUNDA FILA: Categorías + Mis datos + Mis pedidos + Cesta ===== */
@@ -139,28 +163,58 @@ header{
   #mobileCatsBtn{
     order: 4 !important;
     flex-shrink: 0;
+    flex-grow: 0;
   }
   #profileBtn{
     order: 5 !important;
     flex-shrink: 0;
+    flex-grow: 0;
   }
   #btn-orders{
     order: 6 !important;
     flex-shrink: 0;
+    flex-grow: 0;
     display: inline-flex !important;
   }
   #cartBtn{
     order: 7 !important;
     flex-shrink: 0;
+    flex-grow: 0;
   }
   
-  /* Forzar salto de línea después de la primera fila usando pseudo-elemento */
+  /* Forzar salto de línea después de la primera fila - método más robusto para iPhone */
   header::after{
-    content: '';
-    flex-basis: 100%;
-    width: 100%;
-    order: 3.5;
-    height: 0;
+    content: '' !important;
+    flex-basis: 100% !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    order: 3.5 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    visibility: hidden !important;
+    overflow: hidden !important;
+  }
+  
+  /* Asegurar que en iPhone el salto funcione */
+  @supports (-webkit-touch-callout: none) {
+    header::after{
+      flex-basis: 100% !important;
+      -webkit-flex-basis: 100% !important;
+      order: 3.5 !important;
+      -webkit-order: 3.5 !important;
+    }
+  }
+  
+  /* Asegurar que los elementos de la segunda fila no se envuelvan antes */
+  #mobileCatsBtn,
+  #profileBtn,
+  #btn-orders,
+  #cartBtn{
+    flex-basis: auto !important;
+    width: auto !important;
   }
   
   /* ===== ELEMENTOS OCULTOS EN MÓVIL ===== */
