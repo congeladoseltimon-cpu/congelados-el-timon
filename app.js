@@ -80,7 +80,21 @@ const clampWeight = v => { const o = weightOptions(); for(let i=0;i<o.length;i++
 function getProfile(){
   try{ return JSON.parse(localStorage.getItem(PROFILE_KEY)) || {}; }catch(e){ return {}; }
 }
-function saveProfile(p){ localStorage.setItem(PROFILE_KEY, JSON.stringify(p)); }
+function saveProfile(p){ 
+  try {
+    localStorage.setItem(PROFILE_KEY, JSON.stringify(p));
+    // Verificar que se guardó correctamente
+    const saved = JSON.parse(localStorage.getItem(PROFILE_KEY));
+    if(!saved || !saved.nombre || !saved.telefono){
+      console.error('Error: Los datos no se guardaron correctamente');
+      return false;
+    }
+    return true;
+  } catch(e) {
+    console.error('Error al guardar perfil:', e);
+    return false;
+  }
+}
 function isProfileComplete(p){ return p && p.nombre && p.telefono; }
 
 // ---------- Consentimientos RGPD ----------
@@ -161,6 +175,7 @@ function openProfile(goCheckout=false){
 function closeProfile(){
   afterProfileGoCheckout = false;
   document.getElementById('profileModal').classList.remove('open');
+  scrollToTopSafe();
 }
 function bindProfile(){
   const btn = document.getElementById('profileBtn');
@@ -201,11 +216,23 @@ function bindProfile(){
     };
     if(!isProfileComplete(p)){ alert('Completa al menos Nombre y Teléfono'); return; }
     
-    // Solo guardar perfil si hay consentimiento para almacenamiento local
+    // Guardar perfil si hay consentimiento para almacenamiento local
     if(localConsent === 'yes'){
-      saveProfile(p);
-      try{ sessionStorage.setItem('profile_session_ok','1'); __profileSessionOK = true; }catch(e){}
-      showToast('Datos guardados');
+      try {
+        saveProfile(p);
+        try{ sessionStorage.setItem('profile_session_ok','1'); __profileSessionOK = true; }catch(e){}
+        // Verificar que se guardó correctamente
+        const saved = getProfile();
+        if(saved && saved.nombre && saved.telefono){
+          showToast('Datos guardados correctamente');
+        } else {
+          showToast('Error al guardar los datos. Por favor, inténtalo de nuevo.');
+          console.error('Error: Los datos no se guardaron correctamente');
+        }
+      } catch(e) {
+        console.error('Error al guardar perfil:', e);
+        showToast('Error al guardar los datos. Por favor, inténtalo de nuevo.');
+      }
     }else{
       // Aunque no se guarden, mantener los datos en el formulario para poder usarlos en el pedido
       // Marcar como "verificado" temporalmente para permitir checkout
@@ -226,9 +253,22 @@ function loadFavorites(){
 function saveFavorites(favs){
   // Solo guardar si hay consentimiento para almacenamiento local
   if(!hasLocalDataConsent()){
-    return;
+    console.warn('No hay consentimiento para guardar favoritos');
+    return false;
   }
-  try{ localStorage.setItem(FAVORITES_KEY, JSON.stringify(favs)); }catch(e){}
+  try{ 
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favs));
+    // Verificar que se guardó correctamente
+    const saved = JSON.parse(localStorage.getItem(FAVORITES_KEY));
+    if(JSON.stringify(saved) !== JSON.stringify(favs)){
+      console.error('Error: Los favoritos no se guardaron correctamente');
+      return false;
+    }
+    return true;
+  }catch(e){
+    console.error('Error al guardar favoritos:', e);
+    return false;
+  }
 }
 function isFavorite(id){ const favs = loadFavorites(); return favs.includes(id); }
 function toggleFavorite(id){
@@ -249,10 +289,21 @@ function toggleFavorite(id){
     newState = true;
   }
   // Guardar y verificar que se guardó correctamente
-  saveFavorites(favs);
-  // Verificar que realmente se guardó leyendo de nuevo
-  const saved = isFavorite(id);
-  return saved;
+  const saved = saveFavorites(favs);
+  if(saved){
+    // Verificar que realmente se guardó leyendo de nuevo
+    const verified = isFavorite(id);
+    if(verified !== newState){
+      console.error('Error: El estado del favorito no coincide después de guardar');
+      showToast('Error al guardar favorito. Por favor, inténtalo de nuevo.');
+      return isFavorite(id); // Retornar el estado anterior
+    }
+    return verified;
+  } else {
+    console.error('Error: No se pudieron guardar los favoritos');
+    showToast('Error al guardar favorito. Por favor, inténtalo de nuevo.');
+    return isFavorite(id); // Retornar el estado anterior
+  }
 }
 
 // -------- Histórico de Pedidos --------
@@ -737,7 +788,10 @@ function openCheckout(){
   buildCheckoutSummary();
   document.getElementById('checkoutModal').classList.add('open');
 }
-function closeCheckout(){ document.getElementById('checkoutModal').classList.remove('open'); }
+function closeCheckout(){
+  document.getElementById('checkoutModal').classList.remove('open');
+  scrollToTopSafe();
+}
 function buildCheckoutSummary(){
   const box = document.getElementById('checkoutSummary');
   const info = document.getElementById('customerSummary');
@@ -851,6 +905,16 @@ function closeOrdersPanel(){
   const panel = document.getElementById('orders-panel');
   if(panel) panel.classList.remove('is-open');
   document.body.classList.remove('orders-panel-open');
+  scrollToTopSafe();
+}
+function toggleOrdersPanel(){
+  const panel = document.getElementById('orders-panel');
+  if(!panel) return;
+  if(panel.classList.contains('is-open')){
+    closeOrdersPanel();
+  } else {
+    openOrdersPanel();
+  }
 }
 function renderOrdersList(){
   const list = document.getElementById('orders-list');
@@ -943,6 +1007,7 @@ function showOrderDetails(orderId){
 function closeOrderDetails(){
   const modal = document.getElementById('orderDetailsModal');
   if(modal) modal.classList.remove('open');
+  scrollToTopSafe();
 }
 // -------- Panel de Categorías Móvil --------
 function openCategoriesPanel(){
@@ -1005,6 +1070,7 @@ function closeCategoriesPanel(){
     panel.setAttribute('aria-hidden', 'true');
     if(overlay) overlay.setAttribute('aria-hidden', 'true');
   }, 100);
+  scrollToTopSafe();
 }
 function addOrderItemToCart(orderId, itemIndex){
   const orders = loadOrders();
@@ -1041,6 +1107,7 @@ function openFavoritesPanel(){
 function closeFavoritesPanel(){
   const modal = document.getElementById('favoritesModal');
   if(modal) modal.classList.remove('open');
+  scrollToTopSafe();
 }
 function renderFavoritesList(){
   const list = document.getElementById('favorites-list');
@@ -1081,8 +1148,39 @@ function removeFavorite(id){
 function goHome(){
   filtered = []; filteredByUser = false;
   document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));
+  
+  // Cerrar todos los paneles y modales abiertos
+  try{
+    if(typeof closeCategoriesPanel === 'function') closeCategoriesPanel();
+  }catch(e){}
+  try{
+    if(typeof closeOrdersPanel === 'function') closeOrdersPanel();
+  }catch(e){}
+  try{
+    if(typeof closeFavoritesPanel === 'function') closeFavoritesPanel();
+  }catch(e){}
+  try{
+    if(typeof closeCheckout === 'function') closeCheckout();
+  }catch(e){}
+  
+  // Cerrar formulario de búsqueda si está abierto
+  try{
+    const searchForm = document.getElementById('search');
+    if(searchForm && searchForm.classList.contains('active')){
+      searchForm.classList.remove('active');
+    }
+  }catch(e){}
+  
   renderProducts();
   try{ window.scrollTo({ top: 0, behavior: 'smooth' }); }catch(e){ window.scrollTo(0,0); }
+}
+
+function scrollToTopSafe(){
+  try{
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }catch(e){
+    try{ window.scrollTo(0,0); }catch(_){}
+  }
 }
 
 // Carrusel JS (autoplay y flechas; dots ya funcionan sin JS)
@@ -1121,7 +1219,42 @@ function initHowTo(){
 // Binds de cabecera y carrito
 function bindHeader(){
   const home = document.getElementById('homeBtn');
-  if(home) home.addEventListener('click', goHome);
+  if(home) {
+    // Si es un enlace, añadir event listener
+    if(home.tagName === 'A'){
+      home.addEventListener('click', (e)=>{
+        e.preventDefault();
+        goHome();
+      });
+    } else {
+      home.addEventListener('click', goHome);
+    }
+  }
+  // Botón de búsqueda toggle para móvil
+  const searchToggleBtn = document.getElementById('searchToggleBtn');
+  const searchForm = document.getElementById('search');
+  if(searchToggleBtn && searchForm){
+    searchToggleBtn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      searchForm.classList.toggle('active');
+      if(searchForm.classList.contains('active')){
+        // Enfocar el input cuando se muestra
+        setTimeout(()=>{
+          const input = document.getElementById('searchInput');
+          if(input) input.focus();
+        }, 100);
+      }
+    });
+    // Cerrar el formulario de búsqueda al hacer clic fuera
+    document.addEventListener('click', (e)=>{
+      if(searchForm.classList.contains('active') && 
+         !searchForm.contains(e.target) && 
+         e.target !== searchToggleBtn){
+        searchForm.classList.remove('active');
+      }
+    });
+  }
   const cartBtn = document.getElementById('cartBtn');
   if(cartBtn) cartBtn.addEventListener('click', ()=> toggleCart());
   const continueBtn = document.getElementById('continueBtn');
@@ -1422,6 +1555,7 @@ function openLegalModal(modalId){
 function closeLegalModal(modalId){
   const modal = document.getElementById(modalId);
   if(modal) modal.classList.remove('open');
+  scrollToTopSafe();
 }
 function openHowTo(){
   const howto = document.getElementById('howto');

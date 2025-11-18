@@ -20,7 +20,6 @@
 }
 
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 body{margin:0;background:var(--bg);color:var(--text);
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,'Apple Color Emoji','Segoe UI Emoji'}
 
@@ -32,17 +31,6 @@ header{
 }
 /* ===== HEADER RESPONSIVE PARA MÓVIL ===== */
 @media (max-width: 767px){
-  /* --- Ajustes móviles añadidos: forzar 2 filas sin desbordes --- */
-  header .btn .label{ display:none !important; }
-  header .btn .icon{ display:inline-block; margin:0 !important; }
-  /* Ajustes del botón de carrito: mostrar icono + contador con paréntesis */
-  #cartBtn{ padding-left:0.5rem !important; padding-right:0.5rem !important; }
-  #cartBtn .paren{ display:inline !important; }
-  #cartBtn #cartCount{ display:inline-block !important; min-width: 0.9em; text-align:center; }
-  /* Convertir 'Inicio' a icono en móvil para ahorrar ancho */
-  #homeBtn .label{ display:none !important; }
-  #homeBtn .icon{ display:inline-block; }
-
   /* Contenedor principal del header - ESTRICTO: 2 FILAS */
   header{
     flex-wrap: wrap !important;
@@ -95,14 +83,14 @@ header{
     width: auto !important;
   }
   
-  /* ===== PRIMERA FILA: Logo + Texto + Buscar + Inicio ===== */
+  /* ===== PRIMERA FILA: Logo (izquierda) + Buscar + Inicio (derecha) ===== */
   
-  /* Brand - Logo + Texto "Congelados El Timón" */
+  /* Brand - Logo + Texto "Congelados El Timón" - Izquierda */
   .brand{
     order: 1 !important;
     flex: 0 1 auto !important;
     min-width: 0;
-    max-width: calc(32% - 0.2rem) !important; /* Más compacto */
+    max-width: calc(50% - 0.2rem) !important;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -110,7 +98,7 @@ header{
     flex-shrink: 1;
   }
   header h1{
-    font-size: 1.2rem !important;
+    font-size: 1.1rem !important;
     flex-shrink: 1;
     min-width: 0;
     margin: 0 !important;
@@ -123,30 +111,50 @@ header{
     height: 100%;
   }
   .brand span{
-    font-size: 0.85em !important;
+    font-size: 0.8em !important;
   }
   header h1 .brand-logo{
-    height: 1em !important;
+    height: 0.9em !important;
     width: auto;
-    margin-right: 0.3rem !important;
+    margin-right: 0.25rem !important;
     flex-shrink: 0;
   }
   
-  /* Búsqueda - Campo más compacto */
-  #search{
+  /* Botón "Buscar" - Primera fila, derecha */
+  #searchToggleBtn{
     order: 2 !important;
-    flex: 1 1 auto !important;
-    min-width: 0;
-    max-width: calc(45% - 0.2rem) !important; /* Ajustado para iPhone */
-    gap: 0.25rem !important;
-    display: flex !important;
-    height: 40px !important;
-    flex-shrink: 1;
+    flex-shrink: 0;
+    flex-grow: 0;
+    min-width: auto !important;
+    padding: 0.35rem 0.45rem !important;
+    font-size: 0.8rem !important;
   }
-  #search input{
+  
+  /* Formulario de búsqueda - Oculto por defecto en móvil, se muestra cuando está activo */
+  #search.search-form-mobile{
+    order: 2.5 !important;
+    position: fixed !important;
+    top: 90px !important;
+    left: 0.6rem !important;
+    right: 0.6rem !important;
+    width: auto !important;
+    max-width: none !important;
+    display: none !important;
+    margin-top: 0 !important;
+    z-index: 100 !important;
+    background: var(--card) !important;
+    padding: 0.5rem !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    gap: 0.4rem !important;
+  }
+  #search.search-form-mobile.active{
+    display: flex !important;
+  }
+  #search.search-form-mobile input{
     flex: 1 1 auto;
     min-width: 0;
-    font-size: 0.8rem !important;
+    font-size: 0.85rem !important;
     padding: 0.4rem 0.5rem !important;
     height: 40px !important;
     min-height: 40px !important;
@@ -155,46 +163,25 @@ header{
     border-radius: 0.5rem;
     box-sizing: border-box;
   }
-  #search button{
+  #search.search-form-mobile button{
     flex-shrink: 0;
-    font-size: 0.75rem !important;
+    font-size: 0.8rem !important;
     padding: 0.4rem 0.6rem !important;
-    min-width: 55px;
+    min-width: 60px;
     white-space: nowrap;
   }
   
-  /* Inicio - Primera fila */
+  /* Enlace Inicio - Primera fila, derecha */
   #homeBtn{
     order: 3 !important;
     flex-shrink: 0;
     flex-grow: 0;
+    text-decoration: none !important;
+    padding: 0.35rem 0.45rem !important;
+    font-size: 0.8rem !important;
   }
   
-  /* ===== SEGUNDA FILA: Categorías + Mis datos + Mis pedidos + Cesta ===== */
-  
-  #mobileCatsBtn{
-    order: 4 !important;
-    flex-shrink: 0;
-    flex-grow: 0;
-  }
-  #profileBtn{
-    order: 5 !important;
-    flex-shrink: 0;
-    flex-grow: 0;
-  }
-  #btn-orders{
-    order: 6 !important;
-    flex-shrink: 0;
-    flex-grow: 0;
-    display: inline-flex !important;
-  }
-  #cartBtn{
-    order: 7 !important;
-    flex-shrink: 0;
-    flex-grow: 0;
-  }
-  
-  /* Forzar salto de línea después de la primera fila - método más robusto para iPhone */
+  /* Forzar salto de línea después de la primera fila */
   header::after{
     content: '' !important;
     flex-basis: 100% !important;
@@ -220,6 +207,38 @@ header{
     }
   }
   
+  /* ===== SEGUNDA FILA: Categorías + Mis datos + Mis pedidos + Cesta ===== */
+  
+  #mobileCatsBtn{
+    order: 4 !important;
+    flex-shrink: 0;
+    flex-grow: 0;
+    padding: 0.35rem 0.45rem !important;
+    font-size: 0.8rem !important;
+  }
+  #profileBtn{
+    order: 5 !important;
+    flex-shrink: 0;
+    flex-grow: 0;
+    padding: 0.35rem 0.45rem !important;
+    font-size: 0.8rem !important;
+  }
+  #btn-orders{
+    order: 6 !important;
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: inline-flex !important;
+    padding: 0.35rem 0.45rem !important;
+    font-size: 0.8rem !important;
+  }
+  #cartBtn{
+    order: 7 !important;
+    flex-shrink: 0;
+    flex-grow: 0;
+    padding: 0.35rem 0.45rem !important;
+    font-size: 0.8rem !important;
+  }
+  
   /* Asegurar que los elementos de la segunda fila no se envuelvan antes */
   #mobileCatsBtn,
   #profileBtn,
@@ -240,10 +259,157 @@ header{
     display: none !important;
   }
   
+  /* Ocultar formulario de búsqueda normal en móvil (se muestra solo cuando está activo) */
+  #search:not(.search-form-mobile){
+    display: none !important;
+  }
+  
+  /* ===== MODALES LEGALES EN MÓVIL ===== */
+  /* Calcular altura del header: padding (0.5rem*2 = 16px) + primera fila (40px) + gap (0.4rem = 6.4px) + segunda fila (40px) = ~102px */
+  .modal#aviso-legal,
+  .modal#politica-privacidad,
+  .modal#politica-cookies{
+    align-items: flex-start !important;
+    padding: 0 !important;
+    padding-top: 104px !important; /* Altura aproximada del header (102px) + 2px de separación */
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    justify-content: flex-start !important;
+    z-index: 60 !important;
+  }
+  .modal#aviso-legal .box.legal-box,
+  .modal#politica-privacidad .box.legal-box,
+  .modal#politica-cookies .box.legal-box{
+    width: 100% !important;
+    max-width: calc(100vw - 1.5rem) !important;
+    max-height: calc(100vh - 104px - 0.75rem) !important; /* Altura total menos header y padding */
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+  .modal#aviso-legal .legal-header,
+  .modal#politica-privacidad .legal-header,
+  .modal#politica-cookies .legal-header{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0.5rem !important;
+    position: sticky !important;
+    top: 0 !important;
+    padding: 0.75rem 1rem !important;
+    margin: 0 !important;
+    background: var(--card) !important;
+    z-index: 10 !important;
+    border-bottom: 1px solid var(--border) !important;
+    flex-shrink: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .modal#aviso-legal .legal-header h3,
+  .modal#politica-privacidad .legal-header h3,
+  .modal#politica-cookies .legal-header h3{
+    margin: 0 !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    flex: 1 !important;
+  }
+  .modal#aviso-legal .legal-header .btn-icon,
+  .modal#politica-privacidad .legal-header .btn-icon,
+  .modal#politica-cookies .legal-header .btn-icon{
+    border: none !important;
+    background: rgba(0,0,0,0.05) !important;
+    font-size: 1.8rem !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    padding: 0.5rem !important;
+    color: var(--text) !important;
+    flex-shrink: 0 !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 0.25rem !important;
+    transition: background 0.2s ease !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative !important;
+    z-index: 11 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .modal#aviso-legal .legal-header .btn-icon:hover,
+  .modal#aviso-legal .legal-header .btn-icon:active,
+  .modal#politica-privacidad .legal-header .btn-icon:hover,
+  .modal#politica-privacidad .legal-header .btn-icon:active,
+  .modal#politica-cookies .legal-header .btn-icon:hover,
+  .modal#politica-cookies .legal-header .btn-icon:active{
+    background: rgba(0,0,0,0.15) !important;
+    color: var(--text) !important;
+    transform: scale(1.1) !important;
+  }
+  .modal#aviso-legal .legal-content,
+  .modal#politica-privacidad .legal-content,
+  .modal#politica-cookies .legal-content{
+    padding: 1rem !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    flex: 1 !important;
+    min-height: 0 !important;
+  }
+  
   /* Hover states mejorados para móvil */
   header .btn:active{
     transform: scale(0.98);
     opacity: 0.9;
+  }
+  
+  /* ===== PANEL MIS PEDIDOS EN MÓVIL ===== */
+  .side-panel#orders-panel{
+    top: 104px !important; /* Justo debajo del header (102px + 2px de separación) */
+    bottom: auto !important;
+    height: calc(100vh - 104px) !important; /* Altura total menos el header */
+    z-index: 60 !important; /* Por encima del header (z-index: 50) */
+    max-height: calc(100vh - 104px) !important;
+  }
+  /* Overlay del panel de pedidos también debe respetar el header */
+  body.orders-panel-open::before{
+    top: 104px !important; /* Empezar justo debajo del header */
+    z-index: 59 !important; /* Por debajo del panel pero por encima del contenido */
+  }
+
+  /* ===== FAVORITOS EN MÓVIL ===== */
+  .modal#favoritesModal{
+    align-items: flex-start !important;
+    padding: 0 !important;
+    padding-top: 104px !important; /* Justo debajo del header */
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    justify-content: flex-start !important;
+    z-index: 60 !important;
+  }
+  .modal#favoritesModal .favorites-box{
+    width: 100% !important;
+    max-width: calc(100vw - 1.5rem) !important;
+    max-height: calc(100vh - 104px - 0.75rem) !important;
+    margin: 0 !important;
+    border-radius: 1rem !important;
+  }
+  
+  /* ===== GRID DE PRODUCTOS: 2 COLUMNAS EN MÓVIL ===== */
+  #productGrid{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.75rem !important;
+  }
+  #productGrid .card{
+    width: 100% !important;
   }
   
   /* ===== TARJETAS DE PRODUCTOS EN MÓVIL ===== */
@@ -324,10 +490,6 @@ header{
     font-size: 0.8rem !important;
     min-height: 38px !important;
   }
-/* Helper spans for button icons/labels */
-.btn .icon{ margin-right:.35rem; }
-.btn .label{ display:inline; }
-
   
   #homeBtn{
     padding: 0.45rem 0.7rem !important;
@@ -364,9 +526,22 @@ header{
     display: none !important;
   }
   
+  /* Ocultar botón de búsqueda toggle en escritorio */
+  #searchToggleBtn{
+    display: none !important;
+  }
+  
+  /* Mostrar botón Mis pedidos en escritorio */
+  #btn-orders{
+    display: inline-flex !important;
+    order: 3 !important;
+    flex-shrink: 0 !important;
+  }
+  
   /* Asegurar que el header en escritorio mantenga su diseño original */
   header{
     flex-wrap: nowrap !important;
+    position: sticky !important;
   }
   
   /* Restaurar estilos de botones en escritorio */
@@ -374,6 +549,41 @@ header{
     padding: .5rem .7rem;
     font-size: .9rem;
     min-height: auto;
+  }
+  
+  /* Mostrar formulario de búsqueda normal en escritorio */
+  #search.search-form-mobile{
+    display: flex !important;
+    position: static !important;
+    order: 2 !important;
+    flex: 0 1 auto !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: auto !important;
+    max-width: none !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    z-index: auto !important;
+  }
+  #search.search-form-mobile input{
+    flex: 0 1 300px !important;
+    max-width: 360px !important;
+    font-size: .9rem !important;
+    padding: .5rem .7rem !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+  }
+  #search.search-form-mobile button{
+    padding: .5rem .8rem !important;
+    font-size: .9rem !important;
+    min-width: auto !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
   }
 }
 .brand{text-decoration:none;color:inherit}
@@ -576,13 +786,13 @@ body.orders-panel-open::before{content:'';position:fixed;inset:0;background:rgba
 
 /* ===== FORMULARIOS Y BOTONES RESPONSIVE PARA MÓVIL ===== */
 @media (max-width: 767px){
-  /* Modal boxes - más compactos en móvil */
-  .modal{
+  /* Modal boxes - más compactos en móvil (ya definido arriba, pero aquí para otros modales) */
+  .modal:not(.legal-box){
     padding: 0.5rem !important;
     align-items: flex-start !important;
     overflow-y: auto;
   }
-  .modal .box{
+  .modal .box:not(.legal-box){
     padding: 0.75rem !important;
     max-width: calc(100vw - 16px) !important;
     margin: 0 !important;
@@ -857,11 +1067,11 @@ header{ flex-wrap: wrap; } /* permite que el banner ocupe una fila entera */
 
 /* Orden en cabecera: Inicio a la derecha de Buscar */
 .brand{ order:1; }
-#search{ order:2; flex:1; }
-#homeBtn{ order:3; }
-.howto{ order:4; }
-#profileBtn{ order:5; }
-#btn-orders{ order:6; }
+#search{ order:2; flex: 0 1 auto; }
+#btn-orders{ order:3; }
+#homeBtn{ order:4; }
+.howto{ order:5; }
+#profileBtn{ order:6; }
 #cartBtn{ order:7; }
 
 
@@ -869,6 +1079,13 @@ header{ flex-wrap: wrap; } /* permite que el banner ocupe una fila entera */
 html{ scroll-behavior: smooth; }
 header{ position:sticky; top:0; z-index:50; transition: box-shadow .2s ease; }
 header.elevated{ box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+/* Asegurar que el header tenga position sticky en móvil */
+@media (max-width: 767px){
+  header{ 
+    position: sticky; 
+    top: 0;
+  }
+}
 
 /* ===== Categorías topbar ===== */
 .cats-topbar{ position:static; z-index:40; background:var(--card); border-bottom:1px solid var(--border); }
@@ -941,6 +1158,72 @@ body.categories-panel-open .categories-overlay{
   flex: 1;
   overflow-y: auto;
   padding: 0.75rem 0.85rem; /* Padding reducido para menos espacio en blanco */
+}
+.products-subpanel{
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+  border-radius: .6rem;
+  overflow: hidden;
+}
+.products-subpanel-title{
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  padding: 0.75rem 0.85rem;
+  background: var(--card);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background .2s ease;
+  user-select: none;
+}
+.products-subpanel-title:hover{
+  background: #f0f7ff;
+}
+.products-subpanel-title::-webkit-details-marker{
+  display: none;
+}
+.products-subpanel[open] .products-subpanel-title{
+  border-bottom: 1px solid var(--border);
+}
+.products-subpanel[open] .expand-icon{
+  transform: rotate(180deg);
+}
+.expand-icon{
+  transition: transform .2s ease;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.products-submenu{
+  flex-direction: column;
+  gap: .5rem;
+  padding: 0.75rem 0.85rem;
+  margin: 0;
+}
+.panel-action-btn{
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: .6rem;
+  background: var(--card);
+  color: var(--text);
+  font-size: .9rem;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.panel-action-btn:hover{
+  background: #f0f7ff;
+  border-color: #b9dcff;
+}
+.panel-action-btn:active{
+  transform: scale(0.98);
+  opacity: 0.9;
 }
 .categories-panel-content .menu{
   flex-direction: column;
@@ -1412,10 +1695,4 @@ main, .banners-grid{ overflow: visible; }
 }
 @media (min-width: 1120px){
   #productGrid{ grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
-}
-
-
-/* Ocultar iconos añadidos en escritorio para mantener diseño original */
-@media (min-width:768px){
-  #homeBtn .icon, #profileBtn .icon{ display:none !important; }
 }

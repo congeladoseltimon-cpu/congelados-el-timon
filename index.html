@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Congelados El Timón</title>
-<!-- Fallback a Montserrat si no pones fuentes locales -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Story+Script&amp;display=swap" rel="stylesheet"/>
-<link href="styles.css" rel="stylesheet">
-<link href="intro.css" rel="stylesheet"/>
-<style>
+  <meta charset="utf-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Congelados El Timón</title>
+  <!-- Fallback a Montserrat si no pones fuentes locales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Story+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="intro.css">
+  <style>
     /* Ocultar contenido inicialmente para evitar parpadeo antes de la intro */
     body:not(.intro-ready) {
       overflow: hidden;
@@ -32,419 +31,499 @@
       transform: translateY(0) !important;
     }
   </style>
-</link></meta></head>
+</head>
 <body>
-<noscript>
-<div class="noscript">
+  <noscript>
+    <div class="noscript">
       Para usar la búsqueda, filtrar categorías y la cesta, activa JavaScript. El carrusel y "Como Comprar" siguen visibles sin JS.
     </div>
-</noscript>
-<header>
-<!-- Botón Inicio (rojo) -->
-<button aria-label="Inicio" class="btn home" id="homeBtn" title="Inicio" type="button"><span aria-hidden="true" class="icon">🏠</span><span class="label">Inicio</span></button>
-<!-- Marca (ya no hace de Inicio) -->
-<div aria-label="Congelados El Timón" class="brand">
-<h1>
-<img alt="Timón" aria-hidden="true" class="brand-logo" role="img" src="timon6.svg"/>
-<span>Congelados El Timón</span>
-</h1>
-</div>
-<!-- Buscador -->
-<form action="#" id="search">
-<input id="searchInput" placeholder="Buscar productos…" type="search"/>
-<button type="submit">Buscar</button>
-</form>
-<!-- Como Comprar (sin JS) -->
-<details class="howto" id="howto">
-<summary aria-controls="howtoPanel" aria-expanded="false" class="btn">Como Comprar</summary>
-<div aria-label="Cómo comprar" class="popover" id="howtoPanel" role="dialog">
-<h4>Instrucciones</h4>
-<ol>
-<li> Elige tus productos, añadiéndolos a la cesta.</li>
-<li> En tu cesta encontrarás tu selección; ahora toca elegir las cantidades.</li>
-<li> Finalizar compra: tendrás un precio estimado del importe.</li>
-<li> Enviar por WhatsApp: una vez enviado, nos pondremos en contacto para acordar entrega u hora de recogida e importe exacto.</li>
-<li> No pagarás nada hasta el momento de entregarte tu pedido.</li>
-</ol>
-</div>
-</details>
-<!-- Botón Mis datos (registro mínimo) -->
-<button aria-label="Mis datos" class="btn" id="profileBtn" title="Datos del cliente"><span aria-hidden="true" class="icon">👤</span><span class="label">Mis datos</span></button>
-<button aria-label="Mis pedidos" class="btn secondary" id="btn-orders" onclick="openOrdersPanel()" title="Mis pedidos"><span aria-hidden="true" class="icon">📋</span><span class="label">Mis pedidos</span></button>
-<button aria-label="Abrir menú de categorías" class="btn secondary" id="mobileCatsBtn"><span aria-hidden="true" class="icon">☰</span></button>
-<button aria-label="Cesta" class="btn secondary" id="cartBtn"><span aria-hidden="true" class="icon">🛒</span><span class="label">Cesta</span> <span class="paren open">(</span><span id="cartCount">0</span><span class="paren close">)</span></button>
-</header>
-<div class="mobile-aside-bar"><button class="btn secondary" id="mobileAsideBtn">ℹ️ Información</button></div>
-<!-- Topbar Categorías pegada al header (visible solo en escritorio) -->
-<nav aria-label="Categorías" class="cats-topbar" role="navigation">
-<div class="cats-topbar-inner">
-<ul class="menu" id="categoryMenuTop"></ul>
-</div>
-</nav>
-<!-- Panel offcanvas de categorías para móvil -->
-<div aria-hidden="true" aria-label="Categorías" class="categories-mobile-panel" id="categoriesMobilePanel" role="navigation" style="transform: translateX(-100%); visibility: hidden; opacity: 0; pointer-events: none;">
-<div class="categories-panel-header">
-<h3>Categorías</h3>
-<button aria-label="Cerrar menú de categorías" class="btn-icon" id="categoriesCloseBtn" onclick="closeCategoriesPanel()">✕</button>
-</div>
-<div class="categories-panel-content">
-<ul class="menu" id="categoryMenuMobile"></ul>
-</div>
-</div>
-<div aria-hidden="true" class="categories-overlay" id="categoriesOverlay" onclick="closeCategoriesPanel()" style="opacity: 0; visibility: hidden;"></div>
-<div class="layout">
-<aside>
-<!-- (oculto: categorías pasan a topbar) <div class="menu-title">Categorías</div>
+  </noscript>
+
+  <header>
+
+    <!-- Primera línea: Logo + Texto "Buscar" + Enlace "Inicio" -->
+    <!-- Marca (Logo) -->
+    <div class="brand" aria-label="Congelados El Timón">
+      <h1>
+        <img src="timon6.svg" alt="Timón" class="brand-logo" role="img" aria-hidden="true">
+        <span>Congelados El Timón</span>
+      </h1>
+    </div>
+
+    <!-- Texto "Buscar" que abre el buscador -->
+    <button type="button" class="btn secondary" id="searchToggleBtn" title="Buscar productos">Buscar</button>
+
+    <!-- Buscador (oculto por defecto en móvil, se muestra al hacer clic en "Buscar") -->
+    <form id="search" action="#" class="search-form-mobile">
+      <input id="searchInput" type="search" placeholder="Buscar productos…" />
+      <button type="submit">Buscar</button>
+    </form>
+
+    <!-- Botón Mis pedidos (visible en escritorio) -->
+    <button class="btn secondary" id="btn-orders" onclick="toggleOrdersPanel()" title="Mis pedidos">📋 Mis pedidos</button>
+
+    <!-- Enlace Inicio -->
+    <a href="#" class="btn home" id="homeBtn" title="Inicio" onclick="goHome(); return false;">Inicio</a>
+
+    <!-- Segunda línea: Categorías + Mis datos + Cesta -->
+    <!-- Botón Categorías con emoji sandwich -->
+    <button class="btn secondary" id="mobileCatsBtn" aria-label="Abrir menú de categorías">🍔 Categoría</button>
+
+    <!-- Botón Mis datos -->
+    <button class="btn" id="profileBtn" title="Datos del cliente">Mis datos</button>
+
+    <!-- Botón Cesta -->
+    <button class="btn secondary" id="cartBtn">🛒 Cesta (<span id="cartCount">0</span>)</button>
+
+    <!-- Como Comprar (sin JS) - Oculto en móvil -->
+    <details class="howto" id="howto">
+      <summary class="btn" aria-controls="howtoPanel" aria-expanded="false">Como Comprar</summary>
+      <div class="popover" id="howtoPanel" role="dialog" aria-label="Cómo comprar">
+        <h4>Instrucciones</h4>
+        <ol>
+          <li> Elige tus productos, añadiéndolos a la cesta.</li>
+          <li> En tu cesta encontrarás tu selección; ahora toca elegir las cantidades.</li>
+          <li> Finalizar compra: tendrás un precio estimado del importe.</li>
+          <li> Enviar por WhatsApp: una vez enviado, nos pondremos en contacto para acordar entrega u hora de recogida e importe exacto.</li>
+          <li> No pagarás nada hasta el momento de entregarte tu pedido.</li>
+        </ol>
+      </div>
+    </details>
+  </header>
+  <div class="mobile-aside-bar"><button id="mobileAsideBtn" class="btn secondary">ℹ️ Información</button></div>
+
+  <!-- Topbar Categorías pegada al header (visible solo en escritorio) -->
+  <nav class="cats-topbar" role="navigation" aria-label="Categorías">
+    <div class="cats-topbar-inner">
+      <ul class="menu" id="categoryMenuTop"></ul>
+    </div>
+  </nav>
+
+  <!-- Panel offcanvas de categorías para móvil -->
+  <div class="categories-mobile-panel" id="categoriesMobilePanel" role="navigation" aria-label="Categorías" aria-hidden="true" style="transform: translateX(-100%); visibility: hidden; opacity: 0; pointer-events: none;">
+    <div class="categories-panel-header">
+      <h3>Categorías</h3>
+      <button class="btn-icon" id="categoriesCloseBtn" onclick="closeCategoriesPanel()" aria-label="Cerrar menú de categorías">✕</button>
+    </div>
+    <div class="categories-panel-content">
+      <!-- Productos - Botón expandible -->
+      <details class="products-subpanel" id="productsSubpanel">
+        <summary class="products-subpanel-title">
+          <span>Productos</span>
+          <span class="expand-icon">▼</span>
+        </summary>
+        <ul class="menu products-submenu" id="categoryMenuMobile"></ul>
+      </details>
+      
+      <!-- Mis pedidos -->
+      <button class="panel-action-btn" onclick="toggleOrdersPanel(); closeCategoriesPanel();" title="Mis pedidos">
+        📋 Mis pedidos
+      </button>
+      
+      <!-- Favoritos -->
+      <button class="panel-action-btn" onclick="openFavoritesPanel(); closeCategoriesPanel();" title="Favoritos">
+        ❤️ Favoritos
+      </button>
+    </div>
+  </div>
+  <div class="categories-overlay" id="categoriesOverlay" onclick="closeCategoriesPanel()" aria-hidden="true" style="opacity: 0; visibility: hidden;"></div>
+
+
+  <div class="layout">
+    <aside>
+      <!-- (oculto: categorías pasan a topbar) <div class="menu-title">Categorías</div>
       <ul class="menu" id="categoryMenu"></ul> -->
-<hr/>
-<div class="menu-title">Información</div>
-<!-- (oculto: info movida al footer compacto) <div class="actions">
+      <hr/>
+      <div class="menu-title">Información</div>
+      <!-- (oculto: info movida al footer compacto) <div class="actions">
         <span class="chip">Medios de pago: efectivo, tarjeta</span>
         <span class="chip">Pedidos: online, telefónico, WhatsApp</span>
         <span class="chip">Recogida en tienda / A domicilio (según zona)</span>
       </div> -->
-<div class="info">
-<strong>Contacto</strong><br/>
-        Teléfono: <a href="tel:662409381">662 409 381</a><br/>
-        WhatsApp: <a href="https://wa.me/34662409381" rel="noopener" target="_blank">662 409 381</a><br/>
+      <div class="info">
+        <strong>Contacto</strong><br>
+        Teléfono: <a href="tel:662409381">662 409 381</a><br>
+        WhatsApp: <a href="https://wa.me/34662409381" target="_blank" rel="noopener">662 409 381</a><br>
         Email: <a href="mailto:congeladoseltimon@gmail.com">congeladoseltimon@gmail.com</a>
-<br/><br/>
-<strong>Dirección</strong><br/>
+        <br><br>
+        <strong>Dirección</strong><br>
         Calle Eva Cervantes, 12 (El Trébol) – Sevilla 41006
       </div>
-</aside>
-<main>
-<!-- Hero carrusel accesible sin JS -->
-<section aria-label="Zona de banners" class="banners-grid">
-<section class="hero" id="hero">
-<div aria-roledescription="carrusel" class="carousel" id="heroCarousel">
-<input checked="" class="c-slide" id="c1" name="c" type="radio"/>
-<input class="c-slide" id="c2" name="c" type="radio"/>
-<input class="c-slide" id="c3" name="c" type="radio"/>
-<input class="c-slide" id="c4" name="c" type="radio"/>
-<div class="carousel-viewport">
-<div class="carousel-track">
-<div class="slide"><img alt="Fachada de Congelados El Timón" src="Imagenes/portada1.jpg"/></div>
-<div class="slide"><img alt="Rótulo y entrada de la tienda" src="Imagenes/portada2.jpg"/></div>
-<div class="slide"><img alt="Vitrinas y cámaras de congelados" src="Imagenes/portada3.jpg"/></div>
-<div class="slide"><img alt="Selección de productos congelados" src="Imagenes/portada4.jpg"/></div>
-</div>
-</div>
-<div aria-label="Indicadores" class="dots" role="tablist">
-<label aria-selected="true" for="c1" role="tab"></label>
-<label for="c2" role="tab"></label>
-<label for="c3" role="tab"></label>
-<label for="c4" role="tab"></label>
-</div>
-<button aria-label="Anterior" class="nav prev" type="button">‹</button>
-<button aria-label="Siguiente" class="nav next" type="button">›</button>
-</div>
+    </aside>
+
+    <main>
+      <!-- Hero carrusel accesible sin JS -->
+      
+<section class="banners-grid" aria-label="Zona de banners">
+  <section id="hero" class="hero">
+        <div class="carousel" id="heroCarousel" aria-roledescription="carrusel">
+          <input class="c-slide" type="radio" name="c" id="c1" checked>
+          <input class="c-slide" type="radio" name="c" id="c2">
+          <input class="c-slide" type="radio" name="c" id="c3">
+          <input class="c-slide" type="radio" name="c" id="c4">
+          <div class="carousel-viewport">
+            <div class="carousel-track">
+              <div class="slide"><img src="Imagenes/portada1.jpg" alt="Fachada de Congelados El Timón"></div>
+              <div class="slide"><img src="Imagenes/portada2.jpg" alt="Rótulo y entrada de la tienda"></div>
+              <div class="slide"><img src="Imagenes/portada3.jpg" alt="Vitrinas y cámaras de congelados"></div>
+              <div class="slide"><img src="Imagenes/portada4.jpg" alt="Selección de productos congelados"></div>
+            </div>
+          </div>
+          <div class="dots" role="tablist" aria-label="Indicadores">
+            <label for="c1" role="tab" aria-selected="true"></label>
+            <label for="c2" role="tab"></label>
+            <label for="c3" role="tab"></label>
+            <label for="c4" role="tab"></label>
+          </div>
+          <button class="nav prev" aria-label="Anterior" type="button">‹</button>
+          <button class="nav next" aria-label="Siguiente" type="button">›</button>
+        </div>
+      </section>
+  <section class="banner-card" id="banner2">
+    <img src="Imagenes/banner2.jpg" alt="Banner secundario derecha">
+  </section>
+  <section class="banner-card" id="banner3">
+    <img src="Imagenes/banner3.jpg" alt="Banner inferior izquierda">
+  </section>
+  <section class="banner-card" id="banner4">
+    <img src="Imagenes/banner4.jpg" alt="Banner inferior derecha">
+  </section>
 </section>
-<section class="banner-card" id="banner2">
-<img alt="Banner secundario derecha" src="Imagenes/banner2.jpg"/>
-</section>
-<section class="banner-card" id="banner3">
-<img alt="Banner inferior izquierda" src="Imagenes/banner3.jpg"/>
-</section>
-<section class="banner-card" id="banner4">
-<img alt="Banner inferior derecha" src="Imagenes/banner4.jpg"/>
-</section>
-</section>
-<div class="grid" id="productGrid"></div>
-</main>
-</div>
-<!-- Toasts -->
-<div aria-atomic="true" aria-live="polite" class="toast-container" id="toastContainer"></div>
-<!-- Botón WhatsApp flotante con logo y texto -->
-<a aria-label="Chatea en Vivo por WhatsApp (662 409 381)" class="wa" href="https://wa.me/34662409381" rel="noopener" target="_blank" title="Chatea en Vivo por WhatsApp">
-<svg aria-hidden="true" height="22" viewbox="0 0 24 24" width="22">
-<circle cx="12" cy="12" fill="#25D366" r="11"></circle>
-<path d="M8.5 6.5c.6-1.1 2-1.7 3.2-1.5 1.9.3 3.3 1.9 3.5 3.8.2 2.5-1.8 4.6-4.3 4.6-.6 0-1.2-.1-1.8-.4l-1.8 1 .6-2c-.5-.7-.8-1.6-.8-2.5 0-1 .3-1.9 .8-2.6z" fill="#ffffff" opacity=".95"></path>
-</svg>
-<span>Chatea en Vivo</span>
-</a>
-<!-- Carrito -->
-<div class="cart" id="cart">
-<h3>🛒 Tu cesta</h3>
-<div class="muted" id="cartEmpty">Aún no añadiste productos.</div>
-<div class="cart-list" id="cartList"></div>
-<div class="cart-info-row">
-<div class="muted">Total estimado: <strong id="cartTotal">0,00 €</strong></div>
-<div style="display:flex; gap:.5rem;">
-<button class="btn secondary" id="continueBtn">Seguir comprando</button>
-<button class="btn danger" id="cancelBtn">Cancelar</button>
-</div>
-</div>
-<div class="cart-footer">
-<button class="btn success" id="checkoutBtn">Finalizar compra</button>
-</div>
-</div>
-<!-- Modal Checkout -->
-<div aria-modal="true" class="modal" id="checkoutModal" role="dialog">
-<div class="box">
-<h3>✅ Revisar pedido</h3>
-<div class="customer-summary" id="customerSummary"></div>
-<div class="checkout-summary" id="checkoutSummary"></div>
-<div class="checkout-actions">
-<button class="btn" id="editCartBtn">Editar</button>
-<button class="btn danger" id="cancelOrderBtn">Cancelar</button>
-<button class="btn success" id="sendWaBtn">Enviar por WhatsApp</button>
-</div>
-<p class="muted small-note">En el momento que esté preparado el pedido nos pondremos en contacto para facilitar el importe exacto y medio de pago.</p>
-</div>
-</div>
-<!-- Modal Perfil (registro mínimo) -->
-<div aria-modal="true" class="modal" id="profileModal" role="dialog">
-<div class="box">
-<h3>👤 Tus datos</h3>
-<form id="profileForm">
-<div class="form-grid">
-<label>Nombre y apellidos*<br/>
-<input id="pf_nombre" required="" type="text"/>
-</label>
-<label>Teléfono / WhatsApp*<br/>
-<input id="pf_telefono" pattern="[0-9+ ]{6,}" required="" type="tel"/>
-</label>
-<label>Preferencia de entrega<br/>
-<select id="pf_entrega">
-<option value="recogida">Recogida en tienda</option>
-<option value="domicilio">A domicilio</option>
-</select>
-</label>
-<label>Dirección (si es a domicilio)<br/>
-<input id="pf_direccion" placeholder="Calle, número, piso" type="text"/>
-</label>
-<label>Barrio / CP (opcional)<br/>
-<input id="pf_zona" placeholder="El Trébol, 41006…" type="text"/>
-</label>
-<label>Notas (alergias, horarios…)<br/>
-<input id="pf_notas" placeholder="Opcional" type="text"/>
-</label>
-</div>
-<!-- Consentimientos RGPD -->
-<div style="margin-top:1.5rem; padding-top:1.5rem; border-top:2px solid var(--border);">
-<div style="margin-bottom:1.5rem;">
-<label style="display:block; font-weight:700; margin-bottom:.75rem; color:var(--text);">
+
+
+      <div class="grid" id="productGrid"></div>
+    </main>
+  </div>
+
+  <!-- Toasts -->
+  <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Botón WhatsApp flotante con logo y texto -->
+  <a class="wa" href="https://wa.me/34662409381" title="Chatea en Vivo por WhatsApp" aria-label="Chatea en Vivo por WhatsApp (662 409 381)" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+      <circle cx="12" cy="12" r="11" fill="#25D366"/>
+      <path d="M8.5 6.5c.6-1.1 2-1.7 3.2-1.5 1.9.3 3.3 1.9 3.5 3.8.2 2.5-1.8 4.6-4.3 4.6-.6 0-1.2-.1-1.8-.4l-1.8 1 .6-2c-.5-.7-.8-1.6-.8-2.5 0-1 .3-1.9 .8-2.6z" fill="#ffffff" opacity=".95"/>
+    </svg>
+    <span>Chatea en Vivo</span>
+  </a>
+
+  <!-- Carrito -->
+  <div class="cart" id="cart">
+    <h3>🛒 Tu cesta</h3>
+    <div id="cartEmpty" class="muted">Aún no añadiste productos.</div>
+    <div class="cart-list" id="cartList"></div>
+    <div class="cart-info-row">
+      <div class="muted">Total estimado: <strong id="cartTotal">0,00 €</strong></div>
+      <div style="display:flex; gap:.5rem;">
+        <button class="btn secondary" id="continueBtn">Seguir comprando</button>
+        <button class="btn danger" id="cancelBtn">Cancelar</button>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <button class="btn success" id="checkoutBtn">Finalizar compra</button>
+    </div>
+  </div>
+
+  <!-- Modal Checkout -->
+  <div class="modal" id="checkoutModal" role="dialog" aria-modal="true">
+    <div class="box">
+      <h3>✅ Revisar pedido</h3>
+      <div id="customerSummary" class="customer-summary"></div>
+      <div id="checkoutSummary" class="checkout-summary"></div>
+      <div class="checkout-actions">
+        <button class="btn" id="editCartBtn">Editar</button>
+        <button class="btn danger" id="cancelOrderBtn">Cancelar</button>
+        <button class="btn success" id="sendWaBtn">Enviar por WhatsApp</button>
+      </div>
+      <p class="muted small-note">En el momento que esté preparado el pedido nos pondremos en contacto para facilitar el importe exacto y medio de pago.</p>
+    </div>
+  </div>
+
+  <!-- Modal Perfil (registro mínimo) -->
+  <div class="modal" id="profileModal" role="dialog" aria-modal="true">
+    <div class="box">
+      <h3>👤 Tus datos</h3>
+      <form id="profileForm">
+        <div class="form-grid">
+          <label>Nombre y apellidos*<br>
+            <input type="text" id="pf_nombre" required>
+          </label>
+          <label>Teléfono / WhatsApp*<br>
+            <input type="tel" id="pf_telefono" required pattern="[0-9+ ]{6,}">
+          </label>
+          <label>Preferencia de entrega<br>
+            <select id="pf_entrega">
+              <option value="recogida">Recogida en tienda</option>
+              <option value="domicilio">A domicilio</option>
+            </select>
+          </label>
+          <label>Dirección (si es a domicilio)<br>
+            <input type="text" id="pf_direccion" placeholder="Calle, número, piso">
+          </label>
+          <label>Barrio / CP (opcional)<br>
+            <input type="text" id="pf_zona" placeholder="El Trébol, 41006…">
+          </label>
+          <label>Notas (alergias, horarios…)<br>
+            <input type="text" id="pf_notas" placeholder="Opcional">
+          </label>
+        </div>
+
+        <!-- Consentimientos RGPD -->
+        <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:2px solid var(--border);">
+          <div style="margin-bottom:1.5rem;">
+            <label style="display:block; font-weight:700; margin-bottom:.75rem; color:var(--text);">
               Consentimiento para guardar tus datos en este dispositivo *
             </label>
-<div style="display:flex; flex-direction:column; gap:.5rem;">
-<label style="display:flex; align-items:center; gap:.5rem; cursor:pointer;">
-<input id="local-consent-yes" name="localDataConsent" required="" type="radio" value="yes"/>
-<span>Sí, acepto que mis datos se guarden en este dispositivo para futuras compras.</span>
-</label>
-<label style="display:flex; align-items:center; gap:.5rem; cursor:pointer;">
-<input id="local-consent-no" name="localDataConsent" required="" type="radio" value="no"/>
-<span>No, NO quiero que mis datos se guarden en este dispositivo.</span>
-</label>
-</div>
-</div>
-<div style="margin-bottom:1rem;">
-<label style="display:block; font-weight:700; margin-bottom:.75rem; color:var(--text);">
+            <div style="display:flex; flex-direction:column; gap:.5rem;">
+              <label style="display:flex; align-items:center; gap:.5rem; cursor:pointer;">
+                <input type="radio" name="localDataConsent" id="local-consent-yes" value="yes" required>
+                <span>Sí, acepto que mis datos se guarden en este dispositivo para futuras compras.</span>
+              </label>
+              <label style="display:flex; align-items:center; gap:.5rem; cursor:pointer;">
+                <input type="radio" name="localDataConsent" id="local-consent-no" value="no" required>
+                <span>No, NO quiero que mis datos se guarden en este dispositivo.</span>
+              </label>
+            </div>
+          </div>
+
+          <div style="margin-bottom:1rem;">
+            <label style="display:block; font-weight:700; margin-bottom:.75rem; color:var(--text);">
               ¿Deseas recibir promociones y ofertas de Congelados El Timón? *
             </label>
-<div style="display:flex; flex-direction:column; gap:.5rem;">
-<label style="display:flex; align-items:center; gap:.5rem; cursor:pointer;">
-<input id="promo-consent-yes" name="promoConsent" required="" type="radio" value="yes"/>
-<span>Sí, deseo recibir promociones.</span>
-</label>
-<label style="display:flex; align-items:center; gap:.5rem; cursor:pointer;">
-<input id="promo-consent-no" name="promoConsent" required="" type="radio" value="no"/>
-<span>No, no deseo recibir promociones.</span>
-</label>
-</div>
-</div>
-</div>
-<div class="profile-actions">
-<button class="btn danger" id="clearProfileBtn" type="button">Borrar datos</button>
-<button class="btn secondary" id="cancelProfileBtn" type="button">Cancelar</button>
-<button class="btn success" id="saveProfileBtn" type="submit">Guardar</button>
-</div>
-<p class="muted small-note">Sólo guardamos estos datos en tu navegador para facilitar tus pedidos.</p>
-<div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border);">
-<button class="btn danger" id="btn-clear-local-data" style="width:100%;" type="button">Borrar datos de este dispositivo</button>
-<p class="muted small-note" style="margin-top:.5rem;">Elimina todos los datos almacenados localmente (perfil, pedidos y favoritos).</p>
-</div>
-</form>
-</div>
-</div>
-<!-- Panel Mis Pedidos -->
-<div class="side-panel" id="orders-panel">
-<div class="side-panel-header">
-<h3>📋 Mis pedidos</h3>
-<button aria-label="Cerrar" class="btn secondary" id="orders-close" onclick="closeOrdersPanel()">✕</button>
-</div>
-<ul class="orders-list" id="orders-list"></ul>
-</div>
-<!-- Panel Favoritos -->
-<div aria-modal="true" class="modal" id="favoritesModal" role="dialog">
-<div class="box favorites-box">
-<div class="favorites-header">
-<h3>❤️ Favoritos</h3>
-<button aria-label="Cerrar" class="btn-icon" id="favorites-close" onclick="closeFavoritesPanel()">✕</button>
-</div>
-<div class="favorites-list" id="favorites-list"></div>
-</div>
-</div>
-<!-- Modal Detalles Pedido -->
-<div aria-modal="true" class="modal" id="orderDetailsModal" role="dialog">
-<div class="box order-details-box">
-<div class="order-details-header">
-<h3>📋 Detalles del pedido</h3>
-<button aria-label="Cerrar" class="btn-icon" id="order-details-close" onclick="closeOrderDetails()">✕</button>
-</div>
-<div class="order-details-content" id="order-details-content"></div>
-</div>
-</div>
-<!-- Modales Legales -->
-<div aria-modal="true" class="modal" id="aviso-legal" role="dialog">
-<div class="box legal-box">
-<div class="legal-header">
-<h3>Aviso Legal</h3>
-<button aria-label="Cerrar" class="btn-icon" onclick="closeLegalModal('aviso-legal')">✕</button>
-</div>
-<div class="legal-content">
-<h2>1. Datos identificativos</h2>
-<p>El presente sitio web, <strong>Congelados El Timón</strong>, es titularidad de <strong>Antonio Gutiérrez Castillo</strong>, con NIF <strong>28735889B</strong>, actuando como autónomo, con domicilio en <strong>Calle Eva Cervantes 12acc, 41006 Sevilla (España)</strong>.</p>
-<h2>2. Datos de contacto</h2>
-<ul>
-<li>Correo electrónico: <a href="mailto:congeladoseltimon@gmail.com">congeladoseltimon@gmail.com</a></li>
-<li>Teléfono: <a href="tel:+34662409381">+34 662 409 381</a></li>
-</ul>
-<h2>3. Actividad</h2>
-<p><strong>Comercio menor de productos congelados</strong> y gestión de pedidos a través de WhatsApp.</p>
-<h2>4. Condiciones generales de uso</h2>
-<p>El acceso y uso de este sitio web implica la aceptación de las presentes condiciones. El usuario se compromete a utilizar el sitio web de forma conforme a la ley, las buenas costumbres y las presentes condiciones.</p>
-<h2>5. Propiedad intelectual</h2>
-<p>Los contenidos de este sitio web, incluyendo textos, imágenes, logotipos y diseño, son propiedad de Congelados El Timón y están protegidos por las leyes de propiedad intelectual e industrial.</p>
-<h2>6. Limitación de responsabilidad</h2>
-<p>El titular no se hace responsable de los daños derivados del uso de la información contenida en este sitio web, ni de los problemas técnicos o fallos que puedan producirse en equipos o aplicaciones del usuario como consecuencia del acceso al sitio.</p>
-<h2>7. Modificaciones</h2>
-<p>El titular se reserva el derecho de modificar, sin previo aviso, la información contenida en el sitio web, así como su configuración, presentación y condiciones de acceso.</p>
-<p style="margin-top:2rem; font-size:.85rem; color:var(--muted);">Última actualización: <script>document.write(new Date().getFullYear());</script></p>
-</div>
-</div>
-</div>
-<div aria-modal="true" class="modal" id="politica-privacidad" role="dialog">
-<div class="box legal-box">
-<div class="legal-header">
-<h3>Política de Privacidad</h3>
-<button aria-label="Cerrar" class="btn-icon" onclick="closeLegalModal('politica-privacidad')">✕</button>
-</div>
-<div class="legal-content">
-<h2>1. Responsable del tratamiento</h2>
-<p><strong>Antonio Gutiérrez Castillo</strong><br/>
-        NIF: <strong>28735889B</strong><br/>
-        Domicilio: <strong>Calle Eva Cervantes 12acc, 41006 Sevilla (España)</strong><br/>
-        Email: <a href="mailto:congeladoseltimon@gmail.com">congeladoseltimon@gmail.com</a><br/>
+            <div style="display:flex; flex-direction:column; gap:.5rem;">
+              <label style="display:flex; align-items:center; gap:.5rem; cursor:pointer;">
+                <input type="radio" name="promoConsent" id="promo-consent-yes" value="yes" required>
+                <span>Sí, deseo recibir promociones.</span>
+              </label>
+              <label style="display:flex; align-items:center; gap:.5rem; cursor:pointer;">
+                <input type="radio" name="promoConsent" id="promo-consent-no" value="no" required>
+                <span>No, no deseo recibir promociones.</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-actions">
+  <button class="btn danger" type="button" id="clearProfileBtn">Borrar datos</button>
+          <button class="btn secondary" type="button" id="cancelProfileBtn">Cancelar</button>
+          <button class="btn success" type="submit" id="saveProfileBtn">Guardar</button>
+        </div>
+        <p class="muted small-note">Sólo guardamos estos datos en tu navegador para facilitar tus pedidos.</p>
+        <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border);">
+          <button class="btn danger" type="button" id="btn-clear-local-data" style="width:100%;">Borrar datos de este dispositivo</button>
+          <p class="muted small-note" style="margin-top:.5rem;">Elimina todos los datos almacenados localmente (perfil, pedidos y favoritos).</p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Panel Mis Pedidos -->
+  <div class="side-panel" id="orders-panel">
+    <div class="side-panel-header">
+      <h3>📋 Mis pedidos</h3>
+      <button class="btn secondary" id="orders-close" onclick="closeOrdersPanel()" aria-label="Cerrar">✕</button>
+    </div>
+    <ul class="orders-list" id="orders-list"></ul>
+  </div>
+
+  <!-- Panel Favoritos -->
+  <div class="modal" id="favoritesModal" role="dialog" aria-modal="true">
+    <div class="box favorites-box">
+      <div class="favorites-header">
+        <h3>❤️ Favoritos</h3>
+        <button class="btn-icon" id="favorites-close" onclick="closeFavoritesPanel()" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="favorites-list" id="favorites-list"></div>
+    </div>
+  </div>
+
+  <!-- Modal Detalles Pedido -->
+  <div class="modal" id="orderDetailsModal" role="dialog" aria-modal="true">
+    <div class="box order-details-box">
+      <div class="order-details-header">
+        <h3>📋 Detalles del pedido</h3>
+        <button class="btn-icon" id="order-details-close" onclick="closeOrderDetails()" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="order-details-content" id="order-details-content"></div>
+    </div>
+  </div>
+
+  <!-- Modales Legales -->
+  <div class="modal" id="aviso-legal" role="dialog" aria-modal="true">
+    <div class="box legal-box">
+      <div class="legal-header">
+        <h3>Aviso Legal</h3>
+        <button class="btn-icon" onclick="closeLegalModal('aviso-legal')" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="legal-content">
+        <h2>1. Datos identificativos</h2>
+        <p>El presente sitio web, <strong>Congelados El Timón</strong>, es titularidad de <strong>Antonio Gutiérrez Castillo</strong>, con NIF <strong>28735889B</strong>, actuando como autónomo, con domicilio en <strong>Calle Eva Cervantes 12acc, 41006 Sevilla (España)</strong>.</p>
+
+        <h2>2. Datos de contacto</h2>
+        <ul>
+          <li>Correo electrónico: <a href="mailto:congeladoseltimon@gmail.com">congeladoseltimon@gmail.com</a></li>
+          <li>Teléfono: <a href="tel:+34662409381">+34 662 409 381</a></li>
+        </ul>
+
+        <h2>3. Actividad</h2>
+        <p><strong>Comercio menor de productos congelados</strong> y gestión de pedidos a través de WhatsApp.</p>
+
+        <h2>4. Condiciones generales de uso</h2>
+        <p>El acceso y uso de este sitio web implica la aceptación de las presentes condiciones. El usuario se compromete a utilizar el sitio web de forma conforme a la ley, las buenas costumbres y las presentes condiciones.</p>
+
+        <h2>5. Propiedad intelectual</h2>
+        <p>Los contenidos de este sitio web, incluyendo textos, imágenes, logotipos y diseño, son propiedad de Congelados El Timón y están protegidos por las leyes de propiedad intelectual e industrial.</p>
+
+        <h2>6. Limitación de responsabilidad</h2>
+        <p>El titular no se hace responsable de los daños derivados del uso de la información contenida en este sitio web, ni de los problemas técnicos o fallos que puedan producirse en equipos o aplicaciones del usuario como consecuencia del acceso al sitio.</p>
+
+        <h2>7. Modificaciones</h2>
+        <p>El titular se reserva el derecho de modificar, sin previo aviso, la información contenida en el sitio web, así como su configuración, presentación y condiciones de acceso.</p>
+
+        <p style="margin-top:2rem; font-size:.85rem; color:var(--muted);">Última actualización: <script>document.write(new Date().getFullYear());</script></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="politica-privacidad" role="dialog" aria-modal="true">
+    <div class="box legal-box">
+      <div class="legal-header">
+        <h3>Política de Privacidad</h3>
+        <button class="btn-icon" onclick="closeLegalModal('politica-privacidad')" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="legal-content">
+        <h2>1. Responsable del tratamiento</h2>
+        <p><strong>Antonio Gutiérrez Castillo</strong><br>
+        NIF: <strong>28735889B</strong><br>
+        Domicilio: <strong>Calle Eva Cervantes 12acc, 41006 Sevilla (España)</strong><br>
+        Email: <a href="mailto:congeladoseltimon@gmail.com">congeladoseltimon@gmail.com</a><br>
         Teléfono: <a href="tel:+34662409381">+34 662 409 381</a></p>
-<h2>2. Finalidades del tratamiento</h2>
-<ul>
-<li><strong>Gestión de pedidos:</strong> Gestionar los pedidos de productos congelados a través de WhatsApp.</li>
-<li><strong>Almacenamiento local:</strong> Guardar datos de perfil, historial de pedidos y lista de favoritos en el dispositivo del usuario mediante localStorage para agilizar el proceso de compra.</li>
-<li><strong>Comunicaciones promocionales:</strong> Envío de comunicaciones promocionales únicamente si el usuario lo consiente expresamente.</li>
-</ul>
-<h2>3. Base legal</h2>
-<ul>
-<li><strong>Ejecución de la prestación:</strong> La gestión de pedidos se basa en la ejecución del contrato de compraventa.</li>
-<li><strong>Consentimiento:</strong> El almacenamiento local y las comunicaciones promocionales requieren el consentimiento del usuario.</li>
-</ul>
-<h2>4. Destinatarios de los datos</h2>
-<p>No se ceden datos a terceros, salvo obligación legal. Al utilizar WhatsApp para gestionar pedidos, el usuario acepta las condiciones de uso y política de privacidad de WhatsApp.</p>
-<h2>5. Conservación de los datos</h2>
-<ul>
-<li>Los datos almacenados en localStorage se conservan en el dispositivo hasta que el usuario los borra mediante el botón "Borrar datos de este dispositivo" o las herramientas del navegador.</li>
-<li>Los datos compartidos a través de WhatsApp se conservan según la política de privacidad de dicha plataforma y mientras sean necesarios para la gestión del pedido.</li>
-</ul>
-<h2>6. Derechos del usuario</h2>
-<p>Usted tiene derecho a:</p>
-<ul>
-<li><strong>Acceso:</strong> Obtener información sobre sus datos personales que tratamos.</li>
-<li><strong>Rectificación:</strong> Solicitar la corrección de datos inexactos o incompletos.</li>
-<li><strong>Supresión:</strong> Solicitar la eliminación de sus datos cuando ya no sean necesarios.</li>
-<li><strong>Oposición:</strong> Oponerse al tratamiento de sus datos en determinadas circunstancias.</li>
-<li><strong>Limitación:</strong> Solicitar la limitación del tratamiento en determinados casos.</li>
-<li><strong>Portabilidad:</strong> Recibir sus datos en un formato estructurado.</li>
-</ul>
-<p>Para ejercer estos derechos, puede contactar en: <a href="mailto:congeladoseltimon@gmail.com">congeladoseltimon@gmail.com</a></p>
-<p>También puede utilizar el botón <strong>"Borrar datos de este dispositivo"</strong> disponible en esta web para eliminar los datos almacenados localmente.</p>
-<h2>7. Seguridad</h2>
-<p>Se adoptan medidas técnicas y organizativas adecuadas para proteger los datos personales contra el acceso no autorizado, la alteración, divulgación o destrucción.</p>
-<p style="margin-top:2rem; font-size:.85rem; color:var(--muted);">Última actualización: <script>document.write(new Date().getFullYear());</script></p>
-</div>
-</div>
-</div>
-<div aria-modal="true" class="modal" id="politica-cookies" role="dialog">
-<div class="box legal-box">
-<div class="legal-header">
-<h3>Política de Cookies y Almacenamiento Local</h3>
-<button aria-label="Cerrar" class="btn-icon" onclick="closeLegalModal('politica-cookies')">✕</button>
-</div>
-<div class="legal-content">
-<h2>1. Información general</h2>
-<p>Este sitio web <strong>NO utiliza cookies de terceros ni cookies de análisis</strong>. Sin embargo, sí utiliza <strong>almacenamiento local (localStorage)</strong> del navegador para mejorar la experiencia del usuario.</p>
-<h2>2. ¿Qué es localStorage?</h2>
-<p>localStorage es una tecnología que permite almacenar información directamente en el navegador del usuario. Estos datos permanecen en el dispositivo y no se envían automáticamente a ningún servidor.</p>
-<h2>3. ¿Qué datos se guardan en localStorage?</h2>
-<p>Esta web almacena los siguientes datos en el dispositivo del usuario:</p>
-<ul>
-<li><strong>Perfil del cliente (elTimon.profile):</strong> Nombre, teléfono, dirección, zona, preferencia de entrega y notas opcionales.</li>
-<li><strong>Historial de pedidos (elTimon.orders):</strong> Lista de pedidos realizados desde este dispositivo, incluyendo productos, cantidades, totales y datos de envío.</li>
-<li><strong>Lista de favoritos (elTimon.favorites):</strong> Identificadores de productos marcados como favoritos por el usuario.</li>
-</ul>
-<h2>4. Finalidad del almacenamiento local</h2>
-<ul>
-<li>Agilizar el proceso de compra al recordar datos del usuario.</li>
-<li>Mostrar el historial de pedidos anteriores.</li>
-<li>Guardar la lista de productos favoritos del usuario.</li>
-<li>Mejorar la experiencia de navegación sin necesidad de introducir datos repetidamente.</li>
-</ul>
-<h2>5. No se envían datos a servidores</h2>
-<p>En la fase actual, estos datos <strong>NO se envían a ningún servidor</strong> desde la web. Permanecen únicamente en el dispositivo del usuario. La comunicación para gestionar pedidos se realiza directamente a través de WhatsApp.</p>
-<h2>6. Cómo eliminar los datos almacenados</h2>
-<p>El usuario puede eliminar los datos almacenados localmente de dos formas:</p>
-<ul>
-<li><strong>Desde la web:</strong> Utilizando el botón <strong>"Borrar datos de este dispositivo"</strong> disponible en esta página, que elimina todos los datos almacenados (perfil, pedidos y favoritos).</li>
-<li><strong>Desde el navegador:</strong> Accediendo a la configuración del navegador y eliminando los datos de navegación o el almacenamiento local específico de este sitio web.</li>
-</ul>
-<p style="margin-top:1rem;"><strong>Nota:</strong> Al borrar estos datos, perderá el historial de pedidos y la lista de favoritos guardados, y deberá volver a introducir sus datos de perfil.</p>
-<h2>7. Consentimiento</h2>
-<p>Al utilizar esta web y permitir el almacenamiento local en su navegador, usted consiente el uso de localStorage según se describe en esta política.</p>
-<p style="margin-top:2rem; font-size:.85rem; color:var(--muted);">Última actualización: <script>document.write(new Date().getFullYear());</script></p>
-</div>
-</div>
-</div>
-<script src="app.js"></script>
-<footer class="site-footer compact" role="contentinfo">
-<div class="footer-inner">
-<section class="footer-col">
-<h4 class="footer-title">Metodos de Pago</h4>
-<div aria-label="Métodos de pago" class="pay-badges">
-<span class="badge">Visa</span>
-<span class="badge">Mastercard</span>
-<span class="badge">Bizum</span>
-<span class="badge">Efectivo</span>
-</div>
-</section>
-<section class="footer-col">
-<h4 class="footer-title">Contacto</h4>
-<ul class="footer-list">
-<li>Calle Eva Cervantes, 12 – Sevilla 41006</li>
-<li><a href="tel:+34662409381">+34 662 409 381</a></li>
-<li><a href="https://wa.me/34662409381" rel="noopener" target="_blank">WhatsApp</a></li>
-</ul>
-</section>
-<section class="footer-col">
-<h4 class="footer-title">Enlaces</h4>
-<ul class="footer-links">
-<li><a class="footer-link" href="#" onclick="openHowTo(); return false;">Cómo comprar</a></li>
-<li><a class="footer-link" href="#" onclick="openLegalModal('aviso-legal'); return false;">Aviso legal</a></li>
-<li><a class="footer-link" href="#" onclick="openLegalModal('politica-privacidad'); return false;">Política de privacidad</a></li>
-<li><a class="footer-link" href="#" onclick="openLegalModal('politica-cookies'); return false;">Política de cookies</a></li>
-</ul>
-</section>
-</div>
-<div class="footer-legal">© Congelados El Timón</div>
-</footer>
-<script defer="" src="intro.js"></script>
+
+        <h2>2. Finalidades del tratamiento</h2>
+        <ul>
+          <li><strong>Gestión de pedidos:</strong> Gestionar los pedidos de productos congelados a través de WhatsApp.</li>
+          <li><strong>Almacenamiento local:</strong> Guardar datos de perfil, historial de pedidos y lista de favoritos en el dispositivo del usuario mediante localStorage para agilizar el proceso de compra.</li>
+          <li><strong>Comunicaciones promocionales:</strong> Envío de comunicaciones promocionales únicamente si el usuario lo consiente expresamente.</li>
+        </ul>
+
+        <h2>3. Base legal</h2>
+        <ul>
+          <li><strong>Ejecución de la prestación:</strong> La gestión de pedidos se basa en la ejecución del contrato de compraventa.</li>
+          <li><strong>Consentimiento:</strong> El almacenamiento local y las comunicaciones promocionales requieren el consentimiento del usuario.</li>
+        </ul>
+
+        <h2>4. Destinatarios de los datos</h2>
+        <p>No se ceden datos a terceros, salvo obligación legal. Al utilizar WhatsApp para gestionar pedidos, el usuario acepta las condiciones de uso y política de privacidad de WhatsApp.</p>
+
+        <h2>5. Conservación de los datos</h2>
+        <ul>
+          <li>Los datos almacenados en localStorage se conservan en el dispositivo hasta que el usuario los borra mediante el botón "Borrar datos de este dispositivo" o las herramientas del navegador.</li>
+          <li>Los datos compartidos a través de WhatsApp se conservan según la política de privacidad de dicha plataforma y mientras sean necesarios para la gestión del pedido.</li>
+        </ul>
+
+        <h2>6. Derechos del usuario</h2>
+        <p>Usted tiene derecho a:</p>
+        <ul>
+          <li><strong>Acceso:</strong> Obtener información sobre sus datos personales que tratamos.</li>
+          <li><strong>Rectificación:</strong> Solicitar la corrección de datos inexactos o incompletos.</li>
+          <li><strong>Supresión:</strong> Solicitar la eliminación de sus datos cuando ya no sean necesarios.</li>
+          <li><strong>Oposición:</strong> Oponerse al tratamiento de sus datos en determinadas circunstancias.</li>
+          <li><strong>Limitación:</strong> Solicitar la limitación del tratamiento en determinados casos.</li>
+          <li><strong>Portabilidad:</strong> Recibir sus datos en un formato estructurado.</li>
+        </ul>
+        <p>Para ejercer estos derechos, puede contactar en: <a href="mailto:congeladoseltimon@gmail.com">congeladoseltimon@gmail.com</a></p>
+        <p>También puede utilizar el botón <strong>"Borrar datos de este dispositivo"</strong> disponible en esta web para eliminar los datos almacenados localmente.</p>
+
+        <h2>7. Seguridad</h2>
+        <p>Se adoptan medidas técnicas y organizativas adecuadas para proteger los datos personales contra el acceso no autorizado, la alteración, divulgación o destrucción.</p>
+
+        <p style="margin-top:2rem; font-size:.85rem; color:var(--muted);">Última actualización: <script>document.write(new Date().getFullYear());</script></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="politica-cookies" role="dialog" aria-modal="true">
+    <div class="box legal-box">
+      <div class="legal-header">
+        <h3>Política de Cookies y Almacenamiento Local</h3>
+        <button class="btn-icon" onclick="closeLegalModal('politica-cookies')" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="legal-content">
+        <h2>1. Información general</h2>
+        <p>Este sitio web <strong>NO utiliza cookies de terceros ni cookies de análisis</strong>. Sin embargo, sí utiliza <strong>almacenamiento local (localStorage)</strong> del navegador para mejorar la experiencia del usuario.</p>
+
+        <h2>2. ¿Qué es localStorage?</h2>
+        <p>localStorage es una tecnología que permite almacenar información directamente en el navegador del usuario. Estos datos permanecen en el dispositivo y no se envían automáticamente a ningún servidor.</p>
+
+        <h2>3. ¿Qué datos se guardan en localStorage?</h2>
+        <p>Esta web almacena los siguientes datos en el dispositivo del usuario:</p>
+        <ul>
+          <li><strong>Perfil del cliente (elTimon.profile):</strong> Nombre, teléfono, dirección, zona, preferencia de entrega y notas opcionales.</li>
+          <li><strong>Historial de pedidos (elTimon.orders):</strong> Lista de pedidos realizados desde este dispositivo, incluyendo productos, cantidades, totales y datos de envío.</li>
+          <li><strong>Lista de favoritos (elTimon.favorites):</strong> Identificadores de productos marcados como favoritos por el usuario.</li>
+        </ul>
+
+        <h2>4. Finalidad del almacenamiento local</h2>
+        <ul>
+          <li>Agilizar el proceso de compra al recordar datos del usuario.</li>
+          <li>Mostrar el historial de pedidos anteriores.</li>
+          <li>Guardar la lista de productos favoritos del usuario.</li>
+          <li>Mejorar la experiencia de navegación sin necesidad de introducir datos repetidamente.</li>
+        </ul>
+
+        <h2>5. No se envían datos a servidores</h2>
+        <p>En la fase actual, estos datos <strong>NO se envían a ningún servidor</strong> desde la web. Permanecen únicamente en el dispositivo del usuario. La comunicación para gestionar pedidos se realiza directamente a través de WhatsApp.</p>
+
+        <h2>6. Cómo eliminar los datos almacenados</h2>
+        <p>El usuario puede eliminar los datos almacenados localmente de dos formas:</p>
+        <ul>
+          <li><strong>Desde la web:</strong> Utilizando el botón <strong>"Borrar datos de este dispositivo"</strong> disponible en esta página, que elimina todos los datos almacenados (perfil, pedidos y favoritos).</li>
+          <li><strong>Desde el navegador:</strong> Accediendo a la configuración del navegador y eliminando los datos de navegación o el almacenamiento local específico de este sitio web.</li>
+        </ul>
+        <p style="margin-top:1rem;"><strong>Nota:</strong> Al borrar estos datos, perderá el historial de pedidos y la lista de favoritos guardados, y deberá volver a introducir sus datos de perfil.</p>
+
+        <h2>7. Consentimiento</h2>
+        <p>Al utilizar esta web y permitir el almacenamiento local en su navegador, usted consiente el uso de localStorage según se describe en esta política.</p>
+
+        <p style="margin-top:2rem; font-size:.85rem; color:var(--muted);">Última actualización: <script>document.write(new Date().getFullYear());</script></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+
+  <footer class="site-footer compact" role="contentinfo">
+    <div class="footer-inner">
+      <section class="footer-col">
+        <h4 class="footer-title">Metodos de Pago</h4>
+        <div class="pay-badges" aria-label="Métodos de pago">
+          <span class="badge">Visa</span>
+          <span class="badge">Mastercard</span>
+          <span class="badge">Bizum</span>
+          <span class="badge">Efectivo</span>
+        </div>
+      </section>
+      <section class="footer-col">
+        <h4 class="footer-title">Contacto</h4>
+        <ul class="footer-list">
+          <li>Calle Eva Cervantes, 12 – Sevilla 41006</li>
+          <li><a href="tel:+34662409381">+34 662 409 381</a></li>
+          <li><a href="https://wa.me/34662409381" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </section>
+      <section class="footer-col">
+        <h4 class="footer-title">Enlaces</h4>
+        <ul class="footer-links">
+          <li><a href="#" class="footer-link" onclick="openHowTo(); return false;">Cómo comprar</a></li>
+          <li><a href="#" class="footer-link" onclick="openLegalModal('aviso-legal'); return false;">Aviso legal</a></li>
+          <li><a href="#" class="footer-link" onclick="openLegalModal('politica-privacidad'); return false;">Política de privacidad</a></li>
+          <li><a href="#" class="footer-link" onclick="openLegalModal('politica-cookies'); return false;">Política de cookies</a></li>
+        </ul>
+      </section>
+    </div>
+    <div class="footer-legal">© Congelados El Timón</div>
+  </footer>
+
+  <script src="intro.js" defer></script>
 </body>
 </html>
