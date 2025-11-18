@@ -34,15 +34,14 @@ header{
   /* Contenedor principal del header - ESTRICTO: 2 FILAS */
   header{
     flex-wrap: wrap !important;
-    padding: 0.5rem 0.6rem !important; /* Padding más compacto */
-    padding-right: 0.6rem !important; /* Mantener padding derecho para los botones */
-    gap: 0.4rem !important; /* Gap más pequeño */
-    align-items: stretch;
-    justify-content: flex-start !important; /* Alinear al inicio para que margin-left: auto funcione */
+    padding: 0.5rem 0.4rem !important; /* Padding más compacto, especialmente derecho */
+    gap: 0.3rem !important; /* Gap más pequeño */
+    align-items: center !important;
+    justify-content: flex-start !important; /* Alinear al inicio */
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
-    overflow: visible !important;
+    overflow: hidden !important; /* Evitar desbordes */
   }
   
   /* Asegurar compatibilidad con iPhone real */
@@ -102,28 +101,29 @@ header{
   /* Brand - Logo + Texto "Congelados El Timón" - Izquierda */
   .brand{
     order: 1 !important;
-    flex: 0 1 auto !important;
+    flex: 1 1 auto !important; /* Ocupar el espacio disponible */
     min-width: 0;
-    max-width: calc(100% - 200px) !important; /* Dejar espacio para los botones a la derecha */
+    max-width: none !important; /* Sin límite máximo, se ajustará automáticamente */
     overflow: hidden !important; /* Ocultar overflow para evitar que se salga */
     display: flex;
     align-items: center;
     height: 40px !important;
     flex-shrink: 1; /* Permitir que se encoja si es necesario */
-    margin-right: 0.5rem !important; /* Pequeño espacio antes de los botones */
+    margin-right: 0.3rem !important; /* Pequeño espacio antes de los botones */
   }
   header h1{
-    font-size: 1.4rem !important; /* Más grande */
-    flex-shrink: 0; /* No encoger */
+    font-size: 1.2rem !important; /* Tamaño ajustado para que quepa mejor */
+    flex-shrink: 1; /* Permitir que se encoja si es necesario */
     min-width: 0;
     margin: 0 !important;
     white-space: nowrap;
-    overflow: visible !important; /* Permitir que se vea completo */
-    text-overflow: clip !important; /* No cortar con ellipsis */
+    overflow: hidden !important; /* Ocultar overflow */
+    text-overflow: ellipsis !important; /* Mostrar ellipsis si no cabe */
     line-height: 1.2;
     display: flex;
     align-items: center;
     height: 100%;
+    max-width: 100%;
   }
   .brand span{
     font-size: 1em !important; /* Más grande */
@@ -141,13 +141,13 @@ header{
     flex-shrink: 0 !important;
     flex-grow: 0 !important;
     min-width: auto !important;
-    padding: 0.35rem 0.45rem !important;
+    padding: 0.35rem 0.3rem !important; /* Padding reducido para pegar más al borde */
     font-size: 0.8rem !important;
     background: transparent !important;
     border: none !important;
     color: #003366 !important;
     font-weight: 700 !important;
-    margin-left: auto !important; /* Empujar hacia la derecha */
+    margin-left: 0.2rem !important; /* Pequeño espacio desde el brand */
     margin-right: 0 !important; /* Sin margen derecho para pegar al borde */
   }
   #searchToggleBtn:hover,
@@ -205,13 +205,13 @@ header{
     flex-shrink: 0 !important;
     flex-grow: 0 !important;
     text-decoration: none !important;
-    padding: 0.35rem 0.45rem !important;
+    padding: 0.35rem 0.3rem !important; /* Padding reducido para pegar más al borde */
     font-size: 0.8rem !important;
     background: transparent !important;
     border: none !important;
     color: #003366 !important;
     font-weight: 700 !important;
-    margin-left: 0.3rem !important; /* Pequeño espacio entre Buscar e Inicio */
+    margin-left: 0.2rem !important; /* Pequeño espacio entre Buscar e Inicio */
     margin-right: 0 !important; /* Sin margen derecho para pegar al borde */
   }
   #homeBtn:hover,
