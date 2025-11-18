@@ -880,15 +880,19 @@ function orderText(){
   return header + cust + body + total;
 }
 function sendWhatsApp(){ 
-  // IMPORTANTE: Guardar el pedido ANTES de limpiar el carrito
+  // IMPORTANTE: Generar el mensaje de WhatsApp ANTES de limpiar el carrito
+  // orderText() necesita leer el carrito para incluir los productos
+  const whatsappMessage = orderText();
+  
+  // Guardar el pedido ANTES de limpiar el carrito
   // addOrderFromCart() construye el pedido usando el carrito actual, por lo que debe ejecutarse ANTES de clearCart()
   addOrderFromCart('whatsapp');
   
-  // Limpiar el carrito después de guardar el pedido (sin mensaje)
+  // Limpiar el carrito después de guardar el pedido y generar el mensaje (sin mensaje)
   clearCart(false, true);
   try{ toggleCart(false); }catch(_){} 
   try{ closeCheckout(); }catch(_){} 
-  const url = 'https://wa.me/'+WA_NUMBER+'?text='+orderText(); 
+  const url = 'https://wa.me/'+WA_NUMBER+'?text='+whatsappMessage; 
   window.open(url, '_blank'); 
   showToast('Pedido enviado por WhatsApp');
 }
