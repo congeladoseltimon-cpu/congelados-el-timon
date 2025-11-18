@@ -1179,6 +1179,17 @@ function goHome(){
   try{ window.scrollTo({ top: 0, behavior: 'smooth' }); }catch(e){ window.scrollTo(0,0); }
 }
 
+// Función para cerrar el formulario de búsqueda
+function closeSearchForm(){
+  const searchForm = document.getElementById('search');
+  if(searchForm){
+    searchForm.classList.remove('active');
+    // Limpiar el input si se desea
+    const input = document.getElementById('searchInput');
+    if(input) input.value = '';
+  }
+}
+
 function scrollToTopSafe(){
   try{
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1257,6 +1268,16 @@ function bindHeader(){
          e.target !== searchToggleBtn){
         searchForm.classList.remove('active');
       }
+    });
+  }
+  
+  // Botón de cierre del formulario de búsqueda
+  const searchCloseBtn = document.getElementById('searchCloseBtn');
+  if(searchCloseBtn && searchForm){
+    searchCloseBtn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      closeSearchForm();
     });
   }
   const cartBtn = document.getElementById('cartBtn');
