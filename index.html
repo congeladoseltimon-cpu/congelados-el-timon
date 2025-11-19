@@ -21,14 +21,24 @@
       opacity: 0;
       visibility: hidden;
       transform: translateY(10px);
-      transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1) 0.5s, 
-                  visibility 2.5s cubic-bezier(0.4, 0, 0.2, 1) 0.5s,
-                  transform 2.5s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+      transition: opacity 0.6s ease-out 0.2s, 
+                  visibility 0.6s ease-out 0.2s,
+                  transform 0.6s ease-out 0.2s;
     }
     body.intro-ready > *:not(#intro-splash):not(noscript) {
       opacity: 1 !important;
       visibility: visible !important;
       transform: translateY(0) !important;
+      transition: opacity 0.6s ease-out, 
+                  visibility 0.6s ease-out,
+                  transform 0.6s ease-out !important;
+    }
+    /* Si la intro ya se vio, mostrar el contenido inmediatamente sin transición */
+    body.intro-ready.intro-skip-transition > *:not(#intro-splash):not(noscript) {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateY(0) !important;
+      transition: none !important;
     }
   </style>
 </head>
@@ -200,6 +210,9 @@
       <div class="grid" id="productGrid"></div>
     </main>
   </div>
+
+  <!-- Overlay para tarjetas ampliadas -->
+  <div class="card-expand-overlay" id="cardExpandOverlay"></div>
 
   <!-- Toasts -->
   <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>

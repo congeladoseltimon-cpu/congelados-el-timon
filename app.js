@@ -584,33 +584,90 @@ function productCard(p){
     '</div>';
 }
 
+// Variable para evitar múltiples listeners
+let gridClicksBound = false;
+
 function bindGridClicks(){
   const __grid = document.getElementById('productGrid');
   if(!__grid) return;
-  __grid.addEventListener('click', function(e){
+  
+  // Usar event delegation a nivel de document para capturar todos los clics, incluso en tarjetas ampliadas
+  // Solo agregar el listener una vez
+  if(!gridClicksBound){
+    gridClicksBound = true;
+    document.addEventListener('click', function(e){
+    // Manejar botón "Añadir"
     const addBtn = e.target.closest('.add-btn');
     if(addBtn){
+      e.preventDefault();
+      e.stopPropagation();
       const id = addBtn.getAttribute('data-id');
-      addToCart(id);
+      if(id) addToCart(id);
       return;
     }
+    
+    // Manejar botón de favoritos
     const favBtn = e.target.closest('.favorite-btn');
     if(favBtn){
       e.preventDefault();
       e.stopPropagation();
       const id = favBtn.getAttribute('data-id');
-      const oldState = isFavorite(id);
-      const newState = toggleFavorite(id);
-      // Actualizar el estado visual del botón basándose en el estado real guardado
-      favBtn.classList.toggle('active', newState);
-      favBtn.setAttribute('aria-label', newState ? 'Quitar de favoritos' : 'Añadir a favoritos');
-      favBtn.setAttribute('title', newState ? 'Quitar de favoritos' : 'Añadir a favoritos');
-      // Mostrar mensaje solo si el estado cambió exitosamente
-      if(oldState !== newState){
-        showToast(newState ? 'Añadido a favoritos' : 'Eliminado de favoritos');
+      if(id){
+        const oldState = isFavorite(id);
+        const newState = toggleFavorite(id);
+        // Actualizar el estado visual del botón basándose en el estado real guardado
+        favBtn.classList.toggle('active', newState);
+        favBtn.setAttribute('aria-label', newState ? 'Quitar de favoritos' : 'Añadir a favoritos');
+        favBtn.setAttribute('title', newState ? 'Quitar de favoritos' : 'Añadir a favoritos');
+        // Mostrar mensaje solo si el estado cambió exitosamente
+        if(oldState !== newState){
+          showToast(newState ? 'Añadido a favoritos' : 'Eliminado de favoritos');
+        }
       }
+      return;
+    }
+    }, true); // Usar captura para que se ejecute antes que otros listeners
+  }
+  
+  // Listener específico para el grid (solo para ampliar tarjetas)
+  __grid.addEventListener('click', function(e){
+    // Detectar clic en la tarjeta (pero no en botones, badges, ni en el contenido de botones)
+    const card = e.target.closest('.card');
+    // Verificar que no se hizo clic en ningún botón o badge
+    const clickedButton = e.target.closest('button');
+    const clickedBadge = e.target.closest('.badge');
+    
+    if(card && !clickedButton && !clickedBadge){
+      // Alternar estado ampliado
+      const isExpanded = card.classList.contains('expanded');
+      // Cerrar todas las tarjetas ampliadas primero
+      document.querySelectorAll('.card.expanded').forEach(c => {
+        if(c !== card) c.classList.remove('expanded');
+      });
+      // Alternar la tarjeta actual
+      card.classList.toggle('expanded', !isExpanded);
+      // Agregar/quitar overlay
     }
   });
+  
+  // Listener separado para el overlay (está fuera del grid)
+  const overlay = document.getElementById('cardExpandOverlay');
+  if(overlay){
+    overlay.addEventListener('click', function(e){
+      // No cerrar si se hizo clic en un botón o dentro de una tarjeta ampliada
+      const clickedCard = e.target.closest('.card.expanded');
+      const clickedButton = e.target.closest('button');
+      if(clickedCard || clickedButton){
+        e.stopPropagation(); // Detener propagación para que no interfiera
+        return; // No hacer nada, dejar que el evento se propague
+      }
+      // Cerrar todas las tarjetas ampliadas solo si se hizo clic directamente en el overlay
+      document.querySelectorAll('.card.expanded').forEach(c => {
+        c.classList.remove('expanded');
+      });
+      document.body.classList.remove('card-expanded');
+    });
+  }
 }
 
 function renderProducts(){
@@ -618,6 +675,12 @@ function renderProducts(){
   const __hero = document.getElementById('hero');
   const __banners = document.querySelector('.banners-grid');
   if(!__grid) return;
+
+  // Cerrar cualquier tarjeta ampliada al renderizar nuevos productos
+  document.querySelectorAll('.card.expanded').forEach(c => {
+    c.classList.remove('expanded');
+  });
+  document.body.classList.remove('card-expanded');
 
   if(!filtered.length){
     if(filteredByUser){
@@ -1167,6 +1230,12 @@ function goHome(){
     if(typeof closeCheckout === 'function') closeCheckout();
   }catch(e){}
   
+  // Cerrar tarjetas ampliadas
+  document.querySelectorAll('.card.expanded').forEach(c => {
+    c.classList.remove('expanded');
+  });
+  document.body.classList.remove('card-expanded');
+  
   // Cerrar formulario de búsqueda si está abierto
   try{
     const searchForm = document.getElementById('search');
@@ -1351,6 +1420,13 @@ function setupGlobalDismiss(){
   });
   document.addEventListener('keydown', (e)=>{
     if(e.key==='Escape'){
+      // Cerrar tarjetas ampliadas si hay alguna
+      const expandedCards = document.querySelectorAll('.card.expanded');
+      if(expandedCards.length > 0){
+        expandedCards.forEach(c => c.classList.remove('expanded'));
+        document.body.classList.remove('card-expanded');
+        return;
+      }
       // Cerrar panel de categorías si está abierto
       if(document.body.classList.contains('categories-panel-open')){
         try{ closeCategoriesPanel(); }catch(_){}
@@ -1471,6 +1547,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // Asegurar que el panel de categorías esté cerrado al cargar
   document.body.classList.remove('categories-panel-open');
+  document.body.classList.remove('card-expanded');
+  document.body.classList.remove('orders-panel-open');
   const initPanel = document.getElementById('categoriesMobilePanel');
   if(initPanel){
     initPanel.setAttribute('aria-hidden', 'true');
@@ -1485,6 +1563,17 @@ document.addEventListener('DOMContentLoaded', function(){
     initOverlay.style.setProperty('opacity', '0', 'important');
     initOverlay.style.setProperty('visibility', 'hidden', 'important');
   }
+  // Asegurar que el overlay de tarjetas ampliadas esté cerrado
+  const cardOverlay = document.getElementById('cardExpandOverlay');
+  if(cardOverlay){
+    cardOverlay.style.setProperty('opacity', '0', 'important');
+    cardOverlay.style.setProperty('visibility', 'hidden', 'important');
+    cardOverlay.style.setProperty('pointer-events', 'none', 'important');
+  }
+  // Cerrar todas las tarjetas ampliadas
+  document.querySelectorAll('.card.expanded').forEach(card => {
+    card.classList.remove('expanded');
+  });
 
   // Abrir panel de categorías móvil
   var catsBtn = document.getElementById('mobileCatsBtn');

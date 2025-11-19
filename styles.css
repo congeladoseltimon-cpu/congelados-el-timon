@@ -1958,3 +1958,133 @@ main, .banners-grid{ overflow: visible; }
 @media (min-width: 1120px){
   #productGrid{ grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
 }
+
+/* ===== Ampliación de tarjetas de productos ===== */
+.card {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  z-index: 1;
+  transform-origin: center center;
+}
+
+/* El cursor pointer solo en áreas clicables, no en botones */
+.card .add-btn,
+.card .favorite-btn {
+  cursor: pointer;
+}
+
+.card.expanded {
+  transform: scale(1.5);
+  z-index: 100 !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  pointer-events: auto;
+}
+
+/* En móvil, misma ampliación del 50% */
+@media (max-width: 767px) {
+  .card.expanded {
+    transform: scale(1.5);
+    z-index: 100;
+  }
+  
+  /* Asegurar que la tarjeta ampliada no se salga de la pantalla */
+  #productGrid {
+    overflow: visible !important;
+  }
+}
+
+/* Asegurar que los botones sigan siendo clicables en estado ampliado */
+.card.expanded .add-btn {
+  pointer-events: auto !important;
+  z-index: 103 !important;
+  position: relative;
+  cursor: pointer !important;
+}
+
+/* El botón de favoritos mantiene su posición absoluta original */
+.card.expanded .favorite-btn {
+  pointer-events: auto !important;
+  z-index: 103 !important;
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  left: auto !important;
+  bottom: auto !important;
+  cursor: pointer !important;
+}
+
+/* Mejorar la visibilidad de la tarjeta ampliada */
+.card.expanded .badge-wrap img {
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+/* Asegurar que el contenido se vea bien ampliado */
+.card.expanded .content {
+  padding: 1.5rem;
+}
+
+.card.expanded .name {
+  font-size: 1.2em;
+  line-height: 1.3;
+}
+
+.card.expanded .price-inline {
+  font-size: 1.1em;
+}
+
+.card.expanded .add-btn {
+  font-size: 1.1em;
+  padding: 0.75rem 1.5rem;
+}
+
+/* Asegurar que las etiquetas de OFERTA/NOVEDAD se vean bien ampliadas */
+.card.expanded .badge {
+  font-size: 1em;
+  padding: 6px 12px;
+}
+
+/* Mejorar el botón de favoritos en estado ampliado - solo tamaño, mantiene posición */
+.card.expanded .favorite-btn {
+  font-size: 1.6rem;
+  /* La posición absolute ya está definida arriba, no la sobrescribimos */
+}
+
+/* Overlay oscuro cuando hay una tarjeta ampliada */
+.card-expand-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+body.card-expanded .card-expand-overlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Asegurar que las tarjetas ampliadas y sus botones estén por encima del overlay */
+body.card-expanded .card.expanded {
+  pointer-events: auto !important;
+}
+
+body.card-expanded .card.expanded * {
+  pointer-events: auto !important;
+}
+
+/* Asegurar que el grid permita overflow para las tarjetas ampliadas */
+#productGrid {
+  position: relative;
+  z-index: 1;
+}
