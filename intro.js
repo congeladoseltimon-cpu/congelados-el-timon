@@ -7,13 +7,23 @@
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   
   // Función para mostrar el contenido de la página
-  const showPageContent = () => {
+  const showPageContent = (skipTransition = false) => {
     document.body.classList.add("intro-ready");
+    if (skipTransition) {
+      document.body.classList.add("intro-skip-transition");
+    }
   };
   
-  // Si no se va a mostrar la intro, mostrar el contenido inmediatamente
+  // Si no se va a mostrar la intro, mostrar el contenido inmediatamente sin transición
   if (sessionStorage.getItem(SESSION_KEY) === "1" || prefersReducedMotion) {
-    showPageContent();
+    // Esperar a que el DOM esté listo antes de mostrar el contenido
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        showPageContent(true);
+      }, { once: true });
+    } else {
+      showPageContent(true);
+    }
     return;
   }
   
@@ -42,14 +52,26 @@
   };
   
   const hideIntro = () => {
+    // Prevenir múltiples llamadas
+    if (splash.classList.contains("is-hidden")) {
+      return;
+    }
     sessionStorage.setItem(SESSION_KEY, "1");
-    splash.classList.add("is-hidden");
+    // Desbloquear scroll primero
     unlockScroll();
-    // Mostrar el contenido con un delay más largo para una transición más suave
+    // Mostrar el contenido inmediatamente para evitar el oscurecimiento
+    showPageContent(false);
+    // Ocultar la intro con transición
+    splash.classList.add("is-hidden");
+    // Forzar que el overlay no bloquee la interacción inmediatamente
+    splash.style.pointerEvents = "none";
+    splash.style.zIndex = "-1";
+    // Eliminar el elemento del DOM después de la transición
     setTimeout(() => {
-      showPageContent();
-    }, 500); // Delay de 500ms para que comience después de que la intro haya comenzado a desvanecerse
-    setTimeout(() => splash.remove(), 1100); // Aumentado para coincidir con la transición de 1s
+      if (splash && splash.parentNode) {
+        splash.remove();
+      }
+    }, 1000); // Coincide con la transición de 1s en CSS
   };
   
   const showIntro = () => {
