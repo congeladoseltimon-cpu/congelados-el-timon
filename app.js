@@ -602,7 +602,7 @@ function bindGridClicks(){
       e.preventDefault();
       e.stopPropagation();
       const id = addBtn.getAttribute('data-id');
-      if(id) addToCart(id);
+      if(id) openQuantitySelector(id);
       return;
     }
     
@@ -740,11 +740,180 @@ function addToCart(id){
   updateCartCount();
   showToast('Añadido: '+p.nombre);
 }
+
+// -------- Selector de Cantidad --------
+let currentQuantityProductId = null;
+
+function openQuantitySelector(productId){
+  const p = allProducts.find(x=>x.id===productId);
+  if(!p){
+    showToast('Producto no encontrado');
+    return;
+  }
+  
+  currentQuantityProductId = productId;
+  const rule = ruleForCategory(p.categoria);
+  const isUnits = rule === 'solo_unidades';
+  
+  const modal = document.getElementById('quantityModal');
+  const content = document.getElementById('quantityModalContent');
+  if(!modal || !content) return;
+  
+  // Construir el contenido del modal
+  let html = '<div style="margin-bottom:1.5rem;">';
+  html += '<strong style="display:block; margin-bottom:0.5rem; font-size:1.1em;">'+displayName(p.nombre)+'</strong>';
+  html += '<div class="muted">'+p.categoria+' · '+fmtEUR(p.precio);
+  if(p.peso) html += ' · '+p.peso;
+  html += '</div>';
+  html += '</div>';
+  
+  if(isUnits){
+    // Selector de unidades
+    html += '<div style="margin-bottom:1.5rem;">';
+    html += '<label style="display:block; margin-bottom:0.5rem; font-weight:600;">Cantidad (unidades):</label>';
+    html += '<input type="number" id="quantityInput" min="1" step="1" value="1" style="width:100%; padding:0.75rem; font-size:1.1em; border:1px solid var(--border); border-radius:0.5rem; box-sizing:border-box;" />';
+    html += '</div>';
+  } else {
+    // Selector de gramos
+    html += '<div style="margin-bottom:1.5rem;">';
+    html += '<label style="display:block; margin-bottom:0.5rem; font-weight:600;">Cantidad (gramos):</label>';
+    html += '<input type="number" id="quantityInput" min="100" step="50" value="500" style="width:100%; padding:0.75rem; font-size:1.1em; border:1px solid var(--border); border-radius:0.5rem; box-sizing:border-box; margin-bottom:0.75rem;" />';
+    
+    // Botones rápidos para gramos
+    html += '<div style="display:flex; gap:0.5rem; flex-wrap:wrap;">';
+    const weightOpts = weightOptions();
+    weightOpts.forEach(g => {
+      const kg = g >= 1000 ? (g/1000).toFixed(1) + ' kg' : g + ' g';
+      html += '<button type="button" class="btn secondary" onclick="setQuickWeight('+g+')" style="flex:1; min-width:80px;">'+kg+'</button>';
+    });
+    html += '</div>';
+    html += '</div>';
+  }
+  
+  // Botones de acción
+  html += '<div style="display:flex; gap:0.75rem; margin-top:1.5rem;">';
+  html += '<button type="button" class="btn secondary" onclick="closeQuantityModal()" style="flex:1;">Cancelar</button>';
+  html += '<button type="button" class="btn success" onclick="confirmQuantitySelection()" style="flex:1;">Añadir a la cesta</button>';
+  html += '</div>';
+  
+  content.innerHTML = html;
+  
+  // Abrir modal
+  modal.classList.add('open');
+  
+  // Enfocar el input
+  setTimeout(() => {
+    const input = document.getElementById('quantityInput');
+    if(input){
+      input.focus();
+      input.select();
+    }
+  }, 100);
+}
+
+function setQuickWeight(grams){
+  const input = document.getElementById('quantityInput');
+  if(input){
+    input.value = grams;
+    input.focus();
+  }
+}
+
+function confirmQuantitySelection(){
+  if(!currentQuantityProductId){
+    closeQuantityModal();
+    return;
+  }
+  
+  const p = allProducts.find(x=>x.id===currentQuantityProductId);
+  if(!p){
+    showToast('Producto no encontrado');
+    closeQuantityModal();
+    return;
+  }
+  
+  const input = document.getElementById('quantityInput');
+  if(!input){
+    closeQuantityModal();
+    return;
+  }
+  
+  const rule = ruleForCategory(p.categoria);
+  const isUnits = rule === 'solo_unidades';
+  
+  let value = parseFloat(input.value);
+  
+  // Validar
+  if(isNaN(value) || value <= 0){
+    showToast('Por favor, introduce una cantidad válida');
+    return;
+  }
+  
+  if(isUnits){
+    value = Math.max(1, Math.floor(value));
+  } else {
+    value = Math.max(100, Math.floor(value / 50) * 50); // Redondear a múltiplos de 50
+  }
+  
+  // Crear el item del carrito
+  const item = {
+    id: p.id,
+    categoria: p.categoria,
+    nombre: p.nombre,
+    precio: p.precio,
+    peso: p.peso,
+    imagen: p.imagen
+  };
+  
+  if(isUnits){
+    item.unitType = 'u';
+    item.units = value;
+    item.grams = 0;
+  } else {
+    item.unitType = 'g';
+    item.grams = value;
+    item.units = 0;
+  }
+  
+  // Buscar si ya existe un item igual en el carrito
+  const idx = findCartItemByIdAndType(p.id, item.unitType);
+  if(idx > -1){
+    // Si existe, sumar la cantidad
+    if(isUnits){
+      cart[idx].units = (cart[idx].units || 1) + value;
+    } else {
+      cart[idx].grams = (cart[idx].grams || 500) + value;
+    }
+  } else {
+    // Si no existe, añadir nuevo item
+    cart.push(item);
+  }
+  
+  // Actualizar (el carrito se guarda automáticamente en otros lugares)
+  renderCart();
+  updateCartCount();
+  lastAddedId = currentQuantityProductId;
+  
+  // Mostrar mensaje
+  const quantityText = isUnits ? value + 'u' : value + 'g';
+  showToast('Añadido: '+displayName(p.nombre)+' ('+quantityText+')');
+  
+  // Cerrar modal
+  closeQuantityModal();
+}
+
+function closeQuantityModal(){
+  const modal = document.getElementById('quantityModal');
+  if(modal){
+    modal.classList.remove('open');
+  }
+  currentQuantityProductId = null;
+}
 function gramsSelectHTML(selected){
-  const opts = weightOptions();
-  let html = '<select onchange="changeGrams(this)" class="grams-select">';
-  for(let i=0;i<opts.length;i++){ const g = opts[i]; html += '<option value="'+g+'" '+(g===selected?'selected':'')+'>'+g+' g</option>'; }
-  html += '</select>'; return html;
+  // Usar un input numérico con flechas en lugar de select
+  // El valor inicial es el que el usuario eligió (o 500 por defecto)
+  const value = selected || 500;
+  return '<input type="number" min="50" step="10" value="'+value+'" onchange="changeGramsInput(this)" class="grams-input" style="width:100px; padding:0.4rem; border:1px solid var(--border); border-radius:0.4rem; text-align:center;" />';
 }
 function renderCart(){
   const list = document.getElementById('cartList');
@@ -766,6 +935,7 @@ function renderCart(){
          '</div>'
       : '<div class="cart-controls">'+
            gramsSelectHTML(i.grams||500)+
+           '<span class="muted" style="margin-left:0.5rem;">g</span>'+
            '<button class="btn danger" onclick="removeItem('+idx+')">🗑️</button>'+
          '</div>';
     return ''+
@@ -786,10 +956,21 @@ function changeUnits(idx, val){
   renderCart();
 }
 function changeGrams(sel){
+  // Mantener compatibilidad con código antiguo si existe
   let parent = sel.parentNode;
   while(parent && !parent.classList.contains('cart-item')) parent = parent.parentNode;
   const idx = parseInt(parent.getAttribute('data-idx'), 10);
   cart[idx].grams = parseInt(sel.value,10);
+  renderCart();
+}
+
+function changeGramsInput(input){
+  let parent = input.parentNode;
+  while(parent && !parent.classList.contains('cart-item')) parent = parent.parentNode;
+  const idx = parseInt(parent.getAttribute('data-idx'), 10);
+  const value = Math.max(50, parseInt(input.value, 10) || 50);
+  // Permitir cualquier valor personalizado (no redondear)
+  cart[idx].grams = value;
   renderCart();
 }
 function removeItem(idx){ cart.splice(idx,1); renderCart(); }
@@ -1385,6 +1566,7 @@ function setupGlobalDismiss(){
         else if(modal.id==='checkoutModal'){ closeCheckout(); }
         else if(modal.id==='favoritesModal'){ closeFavoritesPanel(); }
         else if(modal.id==='orderDetailsModal'){ closeOrderDetails(); }
+        else if(modal.id==='quantityModal'){ closeQuantityModal(); }
         else if(modal.id==='aviso-legal' || modal.id==='politica-privacidad' || modal.id==='politica-cookies'){ closeLegalModal(modal.id); }
         else { modal.classList.remove('open'); }
       }
@@ -1420,6 +1602,12 @@ function setupGlobalDismiss(){
   });
   document.addEventListener('keydown', (e)=>{
     if(e.key==='Escape'){
+      // Cerrar modal de cantidad si está abierto
+      const quantityModal = document.getElementById('quantityModal');
+      if(quantityModal && quantityModal.classList.contains('open')){
+        closeQuantityModal();
+        return;
+      }
       // Cerrar tarjetas ampliadas si hay alguna
       const expandedCards = document.querySelectorAll('.card.expanded');
       if(expandedCards.length > 0){

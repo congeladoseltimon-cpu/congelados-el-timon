@@ -900,6 +900,20 @@ main{min-height:70vh}
 .cart-item small{color:var(--muted)}
 .cart-controls{display:flex;gap:.4rem;align-items:center}
 .cart-controls select,.cart-controls input{padding:.4rem;border:1px solid var(--border);border-radius:.4rem}
+.grams-input{
+  width: 100px !important;
+  padding: 0.4rem !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 0.4rem !important;
+  text-align: center !important;
+  font-size: 0.9rem !important;
+}
+/* Asegurar que las flechas del input number sean visibles */
+.grams-input::-webkit-inner-spin-button,
+.grams-input::-webkit-outer-spin-button {
+  opacity: 1;
+  height: 20px;
+}
 .cart-footer{display:flex;gap:.5rem;flex-wrap:wrap}
 .cart-info-row{display:flex;justify-content:space-between;align-items:center;margin:.25rem 0 .75rem}
 #cartTotal{color:var(--danger)}
@@ -937,6 +951,46 @@ body.orders-panel-open::before{content:'';position:fixed;inset:0;background:rgba
 .modal.open{display:flex}
 .modal .box{background:var(--card);border:1px solid var(--border);border-radius:1rem;max-width:720px;width:100%;padding:1rem}
 .modal .box h3{margin-top:0}
+
+/* Modal Selector de Cantidad */
+#quantityModal .box{
+  max-width: 480px;
+}
+
+#quantityModal input[type="number"]{
+  font-size: 1.1em;
+  text-align: center;
+}
+
+#quantityModal .btn{
+  font-size: 1em;
+  padding: 0.75rem 1rem;
+}
+
+/* En móvil, ajustar el modal de cantidad */
+@media (max-width: 767px){
+  #quantityModal{
+    padding: 0.5rem;
+    align-items: flex-start;
+    padding-top: 104px;
+  }
+  
+  #quantityModal .box{
+    max-width: calc(100vw - 1rem);
+    width: 100%;
+    padding: 1rem;
+  }
+  
+  #quantityModal input[type="number"]{
+    font-size: 1.2em;
+    padding: 1rem;
+  }
+  
+  #quantityModal .btn{
+    font-size: 1em;
+    padding: 1rem;
+  }
+}
 .muted{color:var(--muted)}
 .small-note{font-size:.85rem;margin-top:.5rem}
 
