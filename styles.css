@@ -1982,10 +1982,10 @@ main, .banners-grid{ overflow: visible; }
   pointer-events: auto;
 }
 
-/* En móvil, misma ampliación del 50% */
+/* En móvil, ampliación del 25% */
 @media (max-width: 767px) {
   .card.expanded {
-    transform: scale(1.5);
+    transform: scale(1.25);
     z-index: 100;
   }
   
