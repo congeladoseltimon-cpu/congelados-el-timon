@@ -894,6 +894,23 @@ main{min-height:70vh}
 /* Carrito */
 .cart{position:fixed;right:1rem;bottom:5.25rem;background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:.75rem;max-width:420px;width:92vw;box-shadow:0 10px 30px rgba(0,0,0,.08);display:none;z-index:30}
 .cart.open{display:block}
+
+/* Overlay oscuro para la cesta en móvil */
+@media (max-width: 900px){
+  body.cart-open::before{
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 29;
+    pointer-events: auto;
+  }
+  
+  /* Asegurar que el overlay empiece debajo del header en móvil */
+  body.cart-open::before{
+    top: var(--header-h, 78px);
+  }
+}
 .cart h3{margin:.25rem 0 .5rem}
 .cart-list{max-height:45vh;overflow:auto;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.5rem 0;margin:.5rem 0}
 .cart-item{display:grid;grid-template-columns:1fr auto;gap:.5rem;padding:.4rem 0;align-items:center}

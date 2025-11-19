@@ -983,7 +983,16 @@ function toggleCart(force){
   const el = document.getElementById('cart');
   if(!el) return;
   const shouldOpen = (force===true) ? true : (force===false) ? false : !el.classList.contains('open');
-  if(shouldOpen){ el.classList.add('open'); renderCart(); } else { el.classList.remove('open'); }
+  if(shouldOpen){ 
+    el.classList.add('open'); 
+    renderCart();
+    // Añadir clase al body para el overlay en móvil
+    document.body.classList.add('cart-open');
+  } else { 
+    el.classList.remove('open');
+    // Quitar clase del body
+    document.body.classList.remove('cart-open');
+  }
 }
 function totalCount(){
   let total = 0;
@@ -1577,6 +1586,7 @@ function setupGlobalDismiss(){
     if(cartEl && cartEl.classList.contains('open')){
       const inside = cartEl.contains(e.target);
       const onBtn = cartBtn && cartBtn.contains(e.target);
+      // Cerrar si se hace clic fuera de la cesta o en el overlay
       if(!inside && !onBtn){ toggleCart(false); }
     }
     // Panel Mis Pedidos
