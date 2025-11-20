@@ -777,7 +777,7 @@ function openQuantitySelector(productId){
     // Selector de gramos
     html += '<div style="margin-bottom:1.5rem;">';
     html += '<label style="display:block; margin-bottom:0.5rem; font-weight:600;">Cantidad (gramos):</label>';
-    html += '<input type="number" id="quantityInput" min="100" step="50" value="500" style="width:100%; padding:0.75rem; font-size:1.1em; border:1px solid var(--border); border-radius:0.5rem; box-sizing:border-box; margin-bottom:0.75rem;" />';
+    html += '<input type="number" id="quantityInput" min="0" step="50" value="0" placeholder="0 gramos" style="width:50%; padding:0.75rem; font-size:1.1em; border:1px solid var(--border); border-radius:0.5rem; box-sizing:border-box; margin-bottom:0.75rem;" />';
     
     // Botones rápidos para gramos
     html += '<div style="display:flex; gap:0.5rem; flex-wrap:wrap;">';
@@ -801,14 +801,7 @@ function openQuantitySelector(productId){
   // Abrir modal
   modal.classList.add('open');
   
-  // Enfocar el input
-  setTimeout(() => {
-    const input = document.getElementById('quantityInput');
-    if(input){
-      input.focus();
-      input.select();
-    }
-  }, 100);
+  // NO enfocar ni seleccionar el input automáticamente
 }
 
 function setQuickWeight(grams){
@@ -841,18 +834,23 @@ function confirmQuantitySelection(){
   const rule = ruleForCategory(p.categoria);
   const isUnits = rule === 'solo_unidades';
   
-  let value = parseFloat(input.value);
+  let value = parseFloat(input.value) || 0;
   
   // Validar
-  if(isNaN(value) || value <= 0){
-    showToast('Por favor, introduce una cantidad válida');
-    return;
-  }
-  
   if(isUnits){
+    if(isNaN(value) || value <= 0){
+      showToast('Por favor, introduce una cantidad válida (mínimo 1 unidad)');
+      return;
+    }
     value = Math.max(1, Math.floor(value));
   } else {
-    value = Math.max(100, Math.floor(value / 50) * 50); // Redondear a múltiplos de 50
+    // Para gramos, validar que sea mayor a 0
+    if(isNaN(value) || value <= 0){
+      showToast('Por favor, introduce una cantidad mayor a 0 gramos');
+      return;
+    }
+    // Redondear a múltiplos de 50 si es mayor a 0
+    value = Math.max(50, Math.floor(value / 50) * 50);
   }
   
   // Crear el item del carrito

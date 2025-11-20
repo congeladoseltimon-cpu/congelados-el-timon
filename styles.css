@@ -965,6 +965,7 @@ body.orders-panel-open::before{content:'';position:fixed;inset:0;background:rgba
 
 /* Modal genérico */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;padding:1rem;z-index:35}
+#quantityModal{z-index:60 !important} /* Por encima del header en móvil */
 .modal.open{display:flex}
 .modal .box{background:var(--card);border:1px solid var(--border);border-radius:1rem;max-width:720px;width:100%;padding:1rem}
 .modal .box h3{margin-top:0}
@@ -990,6 +991,7 @@ body.orders-panel-open::before{content:'';position:fixed;inset:0;background:rgba
     padding: 0.5rem;
     align-items: flex-start;
     padding-top: 104px;
+    z-index: 60 !important; /* Por encima del header (z-index: 50) */
   }
   
   #quantityModal .box{
@@ -1006,6 +1008,11 @@ body.orders-panel-open::before{content:'';position:fixed;inset:0;background:rgba
   #quantityModal .btn{
     font-size: 1em;
     padding: 1rem;
+  }
+  
+  /* Reducir el ancho del input de gramos al 50% en móvil */
+  #quantityModal input#quantityInput[placeholder*="gramos"]{
+    width: 50% !important;
   }
 }
 .muted{color:var(--muted)}
