@@ -1155,6 +1155,12 @@ function openOrdersPanel(){
   panel.classList.add('is-open');
   document.body.classList.add('orders-panel-open');
   renderOrdersList();
+  // Inicializar visibilidad del botón eliminar todos
+  const deleteAllBtn = document.getElementById('deleteAllOrdersBtn');
+  if(deleteAllBtn){
+    const orders = loadOrders();
+    deleteAllBtn.style.display = orders.length > 0 ? 'block' : 'none';
+  }
 }
 function closeOrdersPanel(){
   const panel = document.getElementById('orders-panel');
@@ -1192,10 +1198,42 @@ function renderOrdersList(){
         '<div class="orders-item-actions">'+
           '<button class="btn secondary" onclick="loadOrderIntoCart('+order.id+')">Repetir pedido</button>'+
           '<button class="btn" onclick="showOrderDetails('+order.id+')">Ver detalles</button>'+
+          '<button class="btn danger" onclick="deleteOrder('+order.id+')" title="Eliminar pedido" aria-label="Eliminar pedido">🗑️</button>'+
         '</div>'+
       '</li>';
   }).join('');
+  
+  // Añadir botón para eliminar todos los pedidos al final de la lista
+  const deleteAllBtn = document.getElementById('deleteAllOrdersBtn');
+  if(deleteAllBtn){
+    deleteAllBtn.style.display = orders.length > 0 ? 'block' : 'none';
+  }
 }
+function deleteOrder(orderId){
+  if(!confirm('¿Estás seguro de que quieres eliminar este pedido?')){
+    return;
+  }
+  const orders = loadOrders();
+  const filteredOrders = orders.filter(o => o.id !== orderId);
+  saveOrders(filteredOrders);
+  renderOrdersList();
+  showToast('Pedido eliminado');
+}
+
+function deleteAllOrders(){
+  const orders = loadOrders();
+  if(orders.length === 0){
+    showToast('No hay pedidos para eliminar');
+    return;
+  }
+  if(!confirm('¿Estás seguro de que quieres eliminar TODOS los pedidos? Esta acción no se puede deshacer.')){
+    return;
+  }
+  saveOrders([]);
+  renderOrdersList();
+  showToast('Todos los pedidos han sido eliminados');
+}
+
 function loadOrderIntoCart(orderId){
   const orders = loadOrders();
   const order = orders.find(o => o.id===orderId);
