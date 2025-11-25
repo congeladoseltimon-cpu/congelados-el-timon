@@ -432,9 +432,13 @@ function renderSeedCategories(){
         setTimeout(() => {
           const grid = document.getElementById('productGrid');
           if(grid){
-            grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            try {
+              grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } catch(e) {
+              window.scrollTo(0, grid.offsetTop - 100);
+            }
           }
-        }, 100);
+        }, 150);
       };
     }
 
@@ -690,6 +694,7 @@ function renderProducts(){
   const __grid = document.getElementById('productGrid');
   const __hero = document.getElementById('hero');
   const __banners = document.querySelector('.banners-grid');
+  const __shortcuts = document.getElementById('homeMobileShortcuts');
   if(!__grid) return;
 
   // Cerrar cualquier tarjeta ampliada al renderizar nuevos productos
@@ -702,11 +707,13 @@ function renderProducts(){
     if(filteredByUser){
       if(__hero) __hero.style.display = 'none';
       if(__banners) __banners.style.display = 'none';
+      if(__shortcuts) __shortcuts.style.display = 'none';
       setBannersActive(false);
       __grid.innerHTML = '<div class="muted">No hay productos en esta categoría.</div>';
     }else{
       if(__hero) __hero.style.display = 'block';
       if(__banners) __banners.style.display = '';
+      if(__shortcuts) __shortcuts.style.display = 'flex';
       setBannersActive(true);
       __grid.innerHTML = '';
     }
@@ -715,6 +722,7 @@ function renderProducts(){
 
   if(__hero) __hero.style.display = 'none';
   if(__banners) __banners.style.display = 'none';
+  if(__shortcuts) __shortcuts.style.display = 'none';
   setBannersActive(false);
   __grid.innerHTML = filtered.map(productCard).join('');
 }
@@ -1763,6 +1771,49 @@ function initUI(){
   bindGridClicks();
   bindHeader();
   bindProfile();
+  bindMobileShortcuts();
+}
+
+// -------- Botones de acceso rápido móvil --------
+function bindMobileShortcuts(){
+  const mobileOffersButton = document.getElementById('mobileOffersBtn');
+  const mobileProductsButton = document.getElementById('mobileProductsBtn');
+  
+  if(mobileOffersButton){
+    mobileOffersButton.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      // Usar la función showOffersSection si existe, sino usar la lógica directa
+      if(typeof window.showOffersSection === 'function'){
+        window.showOffersSection();
+      } else {
+        // Fallback: usar la misma lógica que el botón de ofertas del menú
+        filteredByUser = true;
+        filtered = allProducts.filter(isOferta);
+        renderProducts();
+        setTimeout(() => {
+          const grid = document.getElementById('productGrid');
+          if(grid){
+            try {
+              grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } catch(e) {
+              window.scrollTo(0, grid.offsetTop - 100);
+            }
+          }
+        }, 150);
+      }
+    });
+  }
+  
+  if(mobileProductsButton){
+    mobileProductsButton.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      if(typeof openCategoriesPanel === 'function'){
+        openCategoriesPanel();
+      }
+    });
+  }
 }
 
 // -------- Inicio
@@ -1836,25 +1887,6 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }
   
-  // Botones de acceso rápido móvil
-  const mobileOffersButton = document.querySelector('.home-mobile-button--offers');
-  const mobileProductsButton = document.querySelector('.home-mobile-button--products');
-  
-  if(mobileOffersButton){
-    mobileOffersButton.addEventListener('click', function(){
-      if(typeof showOffersSection === 'function'){
-        showOffersSection();
-      }
-    });
-  }
-  
-  if(mobileProductsButton){
-    mobileProductsButton.addEventListener('click', function(){
-      if(typeof openCategoriesPanel === 'function'){
-        openCategoriesPanel();
-      }
-    });
-  }
 
   // Header elevated on scroll
   var hdr = document.querySelector('header');
@@ -1889,7 +1921,15 @@ function displayName(name){
 }
 
 
-document.addEventListener('DOMContentLoaded', function(){ var h=document.getElementById('hero'); setBannersActive(!!(h && h.style.display!=='none')); });
+document.addEventListener('DOMContentLoaded', function(){ 
+  var h=document.getElementById('hero'); 
+  setBannersActive(!!(h && h.style.display!=='none'));
+  // Mostrar botones móviles si el hero está visible
+  const shortcuts = document.getElementById('homeMobileShortcuts');
+  if(shortcuts && h && h.style.display!=='none'){
+    shortcuts.style.display = 'flex';
+  }
+});
 
 // ---------- Protección de datos: borrado de datos locales ----------
 function clearLocalUserData(){
