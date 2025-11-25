@@ -422,6 +422,22 @@ function renderSeedCategories(){
     menu.appendChild(btnOfertas);
     menu.appendChild(btnNovedades);
 
+    // Función reutilizable para mostrar ofertas (para botón móvil)
+    if(typeof window.showOffersSection === 'undefined'){
+      window.showOffersSection = function(){
+        filteredByUser = true;
+        filtered = allProducts.filter(isOferta);
+        renderProducts();
+        // Hacer scroll suave hasta el grid de productos
+        setTimeout(() => {
+          const grid = document.getElementById('productGrid');
+          if(grid){
+            grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      };
+    }
+
     // Categorías
     for(const c of cats){
       const btn = makeButton(c.label, 'cat', ()=>{
@@ -1817,6 +1833,26 @@ document.addEventListener('DOMContentLoaded', function(){
       e.stopPropagation();
       document.body.classList.remove('aside-open');
       openCategoriesPanel();
+    });
+  }
+  
+  // Botones de acceso rápido móvil
+  const mobileOffersButton = document.querySelector('.home-mobile-button--offers');
+  const mobileProductsButton = document.querySelector('.home-mobile-button--products');
+  
+  if(mobileOffersButton){
+    mobileOffersButton.addEventListener('click', function(){
+      if(typeof showOffersSection === 'function'){
+        showOffersSection();
+      }
+    });
+  }
+  
+  if(mobileProductsButton){
+    mobileProductsButton.addEventListener('click', function(){
+      if(typeof openCategoriesPanel === 'function'){
+        openCategoriesPanel();
+      }
     });
   }
 
