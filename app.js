@@ -1173,6 +1173,14 @@ function sendWhatsApp(){
 }
 
 // -------- Panel Mis Pedidos --------
+function ensureOrdersPanelOpen(){
+  const panel = document.getElementById('orders-panel');
+  if(panel){
+    panel.classList.add('is-open');
+  }
+  document.body.classList.add('orders-panel-open');
+}
+
 function openOrdersPanel(){
   const panel = document.getElementById('orders-panel');
   if(!panel) return;
@@ -1242,6 +1250,7 @@ function deleteOrder(orderId){
   saveOrders(filteredOrders);
   renderOrdersList();
   showToast('Pedido eliminado');
+  ensureOrdersPanelOpen();
 }
 
 function deleteAllOrders(){
@@ -1256,6 +1265,7 @@ function deleteAllOrders(){
   saveOrders([]);
   renderOrdersList();
   showToast('Todos los pedidos han sido eliminados');
+  ensureOrdersPanelOpen();
 }
 
 function loadOrderIntoCart(orderId){
@@ -1324,7 +1334,7 @@ function showOrderDetails(orderId){
 function closeOrderDetails(){
   const modal = document.getElementById('orderDetailsModal');
   if(modal) modal.classList.remove('open');
-  scrollToTopSafe();
+  ensureOrdersPanelOpen();
 }
 // -------- Panel de Categorías Móvil --------
 function openCategoriesPanel(){
@@ -1652,10 +1662,12 @@ function setupGlobalDismiss(){
     // Panel Mis Pedidos
     const ordersPanel = document.getElementById('orders-panel');
     const ordersBtn = document.getElementById('btn-orders');
+    const orderDetailsModal = document.getElementById('orderDetailsModal');
+    const inOrderDetailsModal = orderDetailsModal && orderDetailsModal.classList.contains('open') && orderDetailsModal.contains(e.target);
     if(ordersPanel && ordersPanel.classList.contains('is-open')){
       const inside = ordersPanel.contains(e.target);
       const onBtn = ordersBtn && ordersBtn.contains(e.target);
-      if(!inside && !onBtn){ closeOrdersPanel(); }
+      if(!inside && !onBtn && !inOrderDetailsModal){ closeOrdersPanel(); }
     }
     // Panel de Categorías Móvil
     const categoriesPanel = document.getElementById('categoriesMobilePanel');
