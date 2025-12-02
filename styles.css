@@ -1,6 +1,29 @@
 @charset "UTF-8";
 :root{
-  --bg:#f7f7fb;--card:#ffffff;--text:#1e1e24;--muted:#666;--brand:#0ea5e9;--accent:#22c55e;--danger:#ef4444;--border:#e5e7eb;--ok:#16a34a;--price:#facc15;--hero-h:250px;
+  /* Nueva paleta de colores */
+  --color-bg: #F5F7FA;
+  --color-surface: #FFFFFF;
+  --color-primary: #123A5D;
+  --color-primary-light: #165A8C;
+  --color-ice: #E0F6FF;
+  --color-accent: #FFC857;
+  --color-accent-dark: #E0A93A;
+  --color-text: #222222;
+  --color-text-muted: #6B7280;
+  --color-border: #D1D5DB;
+  
+  /* Variables compatibles con código existente */
+  --bg: var(--color-bg);
+  --card: var(--color-surface);
+  --text: var(--color-text);
+  --muted: var(--color-text-muted);
+  --brand: var(--color-primary);
+  --accent: var(--color-accent);
+  --danger: #ef4444;
+  --border: var(--color-border);
+  --ok: #16a34a;
+  --price: var(--color-accent);
+  --hero-h: 250px;
 }
 
 /* Montserrat local (coloca los .woff2/.woff en /fonts) */
@@ -76,17 +99,17 @@ header{
     letter-spacing: 0.01em;
     background: transparent !important; /* Sin fondo de botón */
     border: none !important; /* Sin borde */
-    color: #003366 !important; /* Azul marino */
+    color: var(--color-primary) !important; /* Usar variable de color primario */
   }
   header .btn:hover,
   header .btn:active,
   header .btn:focus{
     background: transparent !important;
-    color: #003366 !important;
+    color: var(--color-primary) !important;
     opacity: 0.8;
   }
   header .btn.home{
-    color: #003366 !important; /* Azul marino también para Inicio */
+    color: var(--color-primary) !important; /* Azul marino también para Inicio */
   }
   
   /* Botón de categorías solo con emoji - más compacto */
@@ -805,7 +828,7 @@ header{
   font-family:'Story Script','Montserrat','MontserratLocal', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
   font-weight:400;
   font-size:1.1em; /* Aumentar un poco más el tamaño del texto dentro del span */
-  color: #004c99; 
+  color: var(--color-primary); 
 }
 header h1{
   font-size:2.2rem;margin:0;white-space:nowrap;display:flex;align-items:center;
@@ -1384,7 +1407,7 @@ header.elevated{ box-shadow: 0 6px 18px rgba(0,0,0,.12); }
 .cats-topbar-inner{ max-width:1200px; margin:0 auto; padding:.5rem 1rem; }
 .cats-topbar .menu{ flex-direction:row; flex-wrap:wrap; gap:.4rem; }
 .cats-topbar .menu button{ width:auto; border:1px solid var(--border); border-radius:999px; }
-.cats-topbar .menu button.active, .cats-topbar .menu button:hover{ background:#eef6ff; border-color:#b9dcff; }
+.cats-topbar .menu button.active, .cats-topbar .menu button:hover{ background:var(--color-ice); border-color:var(--color-primary-light); }
 header + .cats-topbar{ margin-top:0; }
 /* Ocultar topbar en móvil */
 @media (max-width: 1023px){
@@ -1510,8 +1533,8 @@ body.categories-panel-open .categories-overlay{
   font-weight: 500;
 }
 .panel-action-btn:hover{
-  background: #f0f7ff;
-  border-color: #b9dcff;
+  background: var(--color-ice);
+  border-color: var(--color-primary-light);
 }
 .panel-action-btn:active{
   transform: scale(0.98);
@@ -1521,31 +1544,31 @@ body.categories-panel-open .categories-overlay{
 /* Estilos para botones del panel de categorías en móvil: fondo azul y texto blanco */
 @media (max-width: 767px){
   .panel-action-btn{
-    background: #003366 !important; /* Azul marino */
+    background: var(--color-primary) !important; /* Azul marino */
     color: #ffffff !important; /* Texto blanco */
-    border: 1px solid #003366 !important;
+    border: 1px solid var(--color-primary) !important;
     font-weight: 600 !important;
   }
   .panel-action-btn:hover{
-    background: #004488 !important; /* Azul más claro al hover */
-    border-color: #004488 !important;
+    background: var(--color-primary-light) !important; /* Azul más claro al hover */
+    border-color: var(--color-primary-light) !important;
     color: #ffffff !important;
   }
   .panel-action-btn:active{
-    background: #002244 !important; /* Azul más oscuro al activar */
+    background: var(--color-primary) !important; /* Azul más oscuro al activar */
     transform: scale(0.98);
     opacity: 0.9;
   }
   
   /* Botón expandible "Productos" también con fondo azul y texto blanco */
   .products-subpanel-title{
-    background: #003366 !important; /* Azul marino */
+    background: var(--color-primary) !important; /* Azul marino */
     color: #ffffff !important; /* Texto blanco */
-    border: 1px solid #003366 !important;
+    border: 1px solid var(--color-primary) !important;
     font-weight: 600 !important;
   }
   .products-subpanel-title:hover{
-    background: #004488 !important; /* Azul más claro al hover */
+    background: var(--color-primary-light) !important; /* Azul más claro al hover */
     color: #ffffff !important;
   }
   .products-subpanel[open] .products-subpanel-title{
@@ -1665,19 +1688,13 @@ body.categories-panel-open{
 /* === Consolidado: estilos finales solicitados === */
 
 /* Fondo azul suave y header/topbar */
-:root{
-  --bg:#e9f2ff;
-  --card:#ffffff;
-  --text:#1d242f;
-  --muted:#667085;
-  --border:#dfe3ea;
-}
+/* Variables ya definidas en :root principal - no sobrescribir */
 body{
   background: var(--bg);
   background-image:
     radial-gradient(900px 520px at 12% -20%, rgba(255,255,255,.55), rgba(255,255,255,0)),
     radial-gradient(760px 480px at 88% 122%, rgba(255,255,255,.6), rgba(255,255,255,0)),
-    linear-gradient(180deg, rgba(30,64,175,.03), rgba(30,64,175,0));
+    linear-gradient(180deg, rgba(18,58,93,.03), rgba(18,58,93,0));
   background-attachment: fixed;
 }
 header, .cats-topbar{
@@ -1751,7 +1768,7 @@ header, .cats-topbar{
 .cats-topbar .menu button{
   background: transparent !important;
   border: 0 !important;
-  color: #1e40af !important;            /* azul */
+  color: var(--color-primary) !important;            /* azul */
   padding: .24rem .35rem !important;
   font-size: .86rem !important;
   border-radius: 0 !important;
@@ -1759,7 +1776,7 @@ header, .cats-topbar{
 }
 .cats-topbar .menu button:hover,
 .cats-topbar .menu button.active{
-  color: #0b1e78 !important;            /* azul más oscuro al hover/activo */
+  color: var(--color-primary-light) !important;            /* azul más oscuro al hover/activo */
   text-decoration: underline;
   text-underline-offset: 2px;
 }

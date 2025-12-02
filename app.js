@@ -1228,9 +1228,9 @@ function renderOrdersList(){
           '<div style="text-align:right;"><strong>'+fmtEUR(order.total||0)+'</strong><br><small class="muted">'+itemCount+' items</small></div>'+
         '</div>'+
         '<div class="orders-item-actions">'+
-          '<button class="btn secondary" onclick="loadOrderIntoCart('+order.id+')">Repetir pedido</button>'+
-          '<button class="btn" onclick="showOrderDetails('+order.id+')">Ver detalles</button>'+
-          '<button class="btn danger" onclick="deleteOrder('+order.id+')" title="Eliminar pedido" aria-label="Eliminar pedido">🗑️</button>'+
+          '<button type="button" class="btn secondary" onclick="loadOrderIntoCart('+order.id+')">Repetir pedido</button>'+
+          '<button type="button" class="btn" onclick="showOrderDetails('+order.id+')">Ver detalles</button>'+
+          '<button type="button" class="btn danger" onclick="deleteOrder('+order.id+')" title="Eliminar pedido" aria-label="Eliminar pedido">🗑️</button>'+
         '</div>'+
       '</li>';
   }).join('');
@@ -1690,6 +1690,12 @@ function setupGlobalDismiss(){
         closeQuantityModal();
         return;
       }
+      // Cerrar modal de detalles de pedido sin cerrar el panel principal
+      const orderDetailsModal = document.getElementById('orderDetailsModal');
+      if(orderDetailsModal && orderDetailsModal.classList.contains('open')){
+        closeOrderDetails();
+        return;
+      }
       // Cerrar tarjetas ampliadas si hay alguna
       const expandedCards = document.querySelectorAll('.card.expanded');
       if(expandedCards.length > 0){
@@ -1705,7 +1711,6 @@ function setupGlobalDismiss(){
       try{ closeProfile(); }catch(_){}
       try{ closeCheckout(); }catch(_){}
       try{ closeFavoritesPanel(); }catch(_){}
-      try{ closeOrderDetails(); }catch(_){}
       try{ closeLegalModal('aviso-legal'); }catch(_){}
       try{ closeLegalModal('politica-privacidad'); }catch(_){}
       try{ closeLegalModal('politica-cookies'); }catch(_){}
