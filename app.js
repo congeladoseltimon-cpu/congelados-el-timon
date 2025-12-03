@@ -1331,7 +1331,11 @@ function showOrderDetails(orderId){
   const modal = document.getElementById('orderDetailsModal');
   if(modal) modal.classList.add('open');
 }
-function closeOrderDetails(){
+function closeOrderDetails(e){
+  // Prevenir que el evento burbujee y cierre el panel "Mis pedidos"
+  if(e && e.stopPropagation) e.stopPropagation();
+  if(e && e.preventDefault) e.preventDefault();
+  
   const modal = document.getElementById('orderDetailsModal');
   if(modal) modal.classList.remove('open');
   ensureOrdersPanelOpen();
@@ -1663,11 +1667,14 @@ function setupGlobalDismiss(){
     const ordersPanel = document.getElementById('orders-panel');
     const ordersBtn = document.getElementById('btn-orders');
     const orderDetailsModal = document.getElementById('orderDetailsModal');
+    const orderDetailsCloseBtn = document.getElementById('order-details-close');
     const inOrderDetailsModal = orderDetailsModal && orderDetailsModal.classList.contains('open') && orderDetailsModal.contains(e.target);
+    const onOrderDetailsCloseBtn = orderDetailsCloseBtn && orderDetailsCloseBtn.contains(e.target);
     if(ordersPanel && ordersPanel.classList.contains('is-open')){
       const inside = ordersPanel.contains(e.target);
       const onBtn = ordersBtn && ordersBtn.contains(e.target);
-      if(!inside && !onBtn && !inOrderDetailsModal){ closeOrdersPanel(); }
+      // No cerrar el panel si se hace clic en el botón de cerrar del detalle o dentro del modal de detalle
+      if(!inside && !onBtn && !inOrderDetailsModal && !onOrderDetailsCloseBtn){ closeOrdersPanel(); }
     }
     // Panel de Categorías Móvil
     const categoriesPanel = document.getElementById('categoriesMobilePanel');
