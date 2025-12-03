@@ -1330,6 +1330,12 @@ function showOrderDetails(orderId){
   
   const modal = document.getElementById('orderDetailsModal');
   if(modal) modal.classList.add('open');
+  
+  // Añadir listener al botón de cerrar (compatible con GitHub Pages)
+  // Usar setTimeout para asegurar que el DOM esté listo
+  setTimeout(function(){
+    bindOrderDetailsClose();
+  }, 50);
 }
 function closeOrderDetails(e){
   // Prevenir que el evento burbujee y cierre el panel "Mis pedidos"
@@ -1796,6 +1802,7 @@ function initUI(){
   bindHeader();
   bindProfile();
   bindMobileShortcuts();
+  bindOrderDetailsClose(); // Añadir listener inicial para el botón de cerrar del detalle
 }
 
 // -------- Botones de acceso rápido móvil --------
@@ -1838,6 +1845,26 @@ function bindMobileShortcuts(){
       }
     });
   }
+}
+
+// -------- Listener para el botón de cerrar del detalle de pedido (compatible con GitHub Pages)
+function bindOrderDetailsClose(){
+  const closeBtn = document.getElementById('order-details-close');
+  if(!closeBtn) return;
+  
+  // Verificar si ya tiene un listener añadido (evitar duplicados)
+  // Usar un atributo data para marcar que ya tiene listener
+  if(closeBtn.dataset.listenerAdded === 'true') return;
+  
+  // Añadir listener con addEventListener (más compatible que onclick inline en GitHub Pages)
+  closeBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    closeOrderDetails(e);
+  });
+  
+  // Marcar que ya tiene listener para evitar duplicados
+  closeBtn.dataset.listenerAdded = 'true';
 }
 
 // -------- Inicio
