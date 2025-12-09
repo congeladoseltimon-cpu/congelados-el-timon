@@ -1,18 +1,18 @@
 @charset "UTF-8";
 :root{
-  /* Nueva paleta de colores */
-  --color-bg: #F5F7FA;
-  --color-surface: #FFFFFF;
-  --color-primary: #123A5D;
-  --color-primary-light: #165A8C;
-  --color-ice: #E0F6FF;
-  --color-accent: #FFC857;
-  --color-accent-dark: #E0A93A;
-  --color-text: #222222;
-  --color-text-muted: #6B7280;
-  --color-border: #D1D5DB;
+  /* Paleta marca "Congelados El Timón" */
+  --color-bg: #003366;              /* Fondo ligeramente azulado */
+  --color-surface: #FFFFFF;         /* Tarjetas y paneles */
+  --color-primary: #003366;         /* Azul mar principal */
+  --color-primary-light: #003366;   /* Azul más vivo para degradados */
+  --color-ice: #E0F7FF;             /* Azul hielo para fondos suaves */
+  --color-accent: #16a34a;          /* Naranja vivo para botones/CTA */
+  --color-accent-dark: #E06D2F;     /* Naranja más oscuro para hover */
+  --color-text: #111827;            /* Texto principal */
+  --color-text-muted: #6B7280;      /* Texto secundario */
+  --color-border: #D1D5DB;          /* Bordes suaves */
   
-  /* Variables compatibles con código existente */
+  /* Variables compatibles con tu código actual */
   --bg: var(--color-bg);
   --card: var(--color-surface);
   --text: var(--color-text);
@@ -378,7 +378,7 @@ header{
     padding-right: 0.75rem !important;
     padding-bottom: 0.75rem !important;
     justify-content: flex-start !important;
-    z-index: 60 !important;
+    z-index: 100 !important; /* Por encima del header (z-index:50) */
   }
   .modal#aviso-legal .box.legal-box,
   .modal#politica-privacidad .box.legal-box,
@@ -859,11 +859,12 @@ header h1 .brand-logo{
   position:absolute;right:0;top:calc(100% + 8px);
   width:min(92vw, 360px);
   background:var(--card);border:1px solid var(--border);border-radius:.75rem;
-  padding:.75rem .9rem;box-shadow:0 10px 30px rgba(0,0,0,.12);z-index:20
+  padding:.75rem .9rem;box-shadow:0 10px 30px rgba(0,0,0,.12);z-index:20;
+  color:var(--text) !important; /* Asegurar que el texto sea visible */
 }
-.howto .popover h4{margin:.25rem 0 .5rem;font-size:1rem}
+.howto .popover h4{margin:.25rem 0 .5rem;font-size:1rem;color:var(--text) !important}
 .howto .popover ol{margin:.25rem 0 0 1.1rem;padding:0}
-.howto .popover li{margin:.25rem 0}
+.howto .popover li{margin:.25rem 0;color:var(--text) !important}
 
 .layout{display:grid;grid-template-columns:260px 1fr;gap:1rem;padding:1rem;max-width:1200px;margin:0 auto}
 aside{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:.75rem}
@@ -989,6 +990,12 @@ body.orders-panel-open::before{content:'';position:fixed;inset:0;background:rgba
 /* Modal genérico */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;padding:1rem;z-index:35}
 #quantityModal{z-index:60 !important} /* Por encima del header en móvil */
+/* Modales legales por encima del header (z-index:50) */
+.modal#aviso-legal,
+.modal#politica-privacidad,
+.modal#politica-cookies{
+  z-index:100 !important; /* Por encima del header (z-index:50) */
+}
 .modal.open{display:flex}
 .modal .box{background:var(--card);border:1px solid var(--border);border-radius:1rem;max-width:720px;width:100%;padding:1rem}
 .modal .box h3{margin-top:0}
@@ -2283,5 +2290,107 @@ body.card-expanded .card.expanded * {
     padding: 1rem 0.75rem;
     font-size: 1rem;
     min-height: 52px;
+  }
+  /* HEADER más llamativo - Mayor especificidad para sobrescribir estilos de 767px */
+  header{
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light)) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(15,23,42,0.18) !important;
+  }
+
+  header .brand span{
+    color: #fff !important;
+  }
+
+  header .brand img.brand-logo{
+    filter: drop-shadow(0 0 6px rgba(0,0,0,0.35)) !important;
+  }
+
+  /* Botones del header con fondo suave y borde - Sobrescribir estilos de 767px */
+  header .btn,
+  header .btn.secondary,
+  header .btn.home{
+    background: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.25) !important;
+    color: #fff !important;
+  }
+
+  header .btn:hover,
+  header .btn:focus,
+  header .btn:active{
+    background: rgba(255,255,255,0.2) !important;
+    color: #fff !important;
+  }
+  
+  /* Sobrescribir también los estilos específicos de botones */
+  #searchToggleBtn,
+  #homeBtn,
+  #mobileCatsBtn,
+  #cartBtn{
+    background: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.25) !important;
+    color: #fff !important;
+  }
+  
+  #searchToggleBtn:hover,
+  #searchToggleBtn:active,
+  #searchToggleBtn:focus,
+  #homeBtn:hover,
+  #homeBtn:active,
+  #homeBtn:focus,
+  #mobileCatsBtn:hover,
+  #mobileCatsBtn:active,
+  #mobileCatsBtn:focus,
+  #cartBtn:hover,
+  #cartBtn:active,
+  #cartBtn:focus{
+    background: rgba(255,255,255,0.2) !important;
+    color: #fff !important;
+    opacity: 1 !important;
+  }
+} /* Cierre del media query @media (max-width: 480px) */
+
+/* ===== HEADER MÁS LLAMATIVO - ESCRITORIO Y TABLET ===== */
+/* Aplicar en pantallas mayores a 768px (escritorio y tablet) */
+@media (min-width: 768px){
+  header{
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light)) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(15,23,42,0.18) !important;
+  }
+
+  header .brand span{
+    color: #fff !important;
+  }
+
+  header .brand img.brand-logo{
+    filter: drop-shadow(0 0 6px rgba(0,0,0,0.35)) !important;
+  }
+
+  /* Botones del header con fondo suave y borde */
+  header .btn,
+  header .btn.secondary,
+  header .btn.home{
+    background: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.25) !important;
+    color: #fff !important;
+  }
+
+  header .btn:hover,
+  header .btn:focus{
+    background: rgba(255,255,255,0.2) !important;
+    color: #fff !important;
+  }
+  
+  /* Asegurar que el popover de "Como comprar" tenga texto visible */
+  header .howto .popover{
+    color: var(--text) !important;
+  }
+  
+  header .howto .popover h4,
+  header .howto .popover li,
+  header .howto .popover p,
+  header .howto .popover *{
+    color: var(--text) !important;
   }
 }
