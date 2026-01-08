@@ -1,7 +1,7 @@
 categoria;nombre;precio;peso;imagen
 Verduras;Ajo Troceado;9,9;El Kilo;ajotroceado.webp
-Verduras;Alcachofas troceadas OFERTA;8,8;El Kilo;alcachofas.jpg
-Verduras;Arroz Blanco NOVEDAD;3,8;El Kilo;arrozblanco.jpg
+Verduras;Alcachofas troceadas ;8,8;El Kilo;alcachofas.jpg
+Verduras;Arroz Blanco ;3,8;El Kilo;arrozblanco.jpg
 Verduras;Brocoli;4,4;El Kilo;brocoli.jpg
 Verduras;Calabaza en Dados;2.80;El Kilo;calabazaendados.jpg
 Verduras;Calabacin en Dados;3,2;El Kilo;calabacinendados.jpg
@@ -15,7 +15,7 @@ Verduras;Habas Baby;6,8;El Kilo;habasbaby.jpg
 Verduras;Habas Finas;3,8;El Kilo;habasbaby.jpg
 Verduras;Judia Plana Troceada;2,99;El Kilo;judiaplana.jpg
 Verduras;Judia Redonda Troceada;2,99;El Kilo;judiaredonda.jpg
-Verduras;Menestra Selección Findus;4,75;El Kilo;menestraseleccion.jpg
+Verduras;Menestra Selecciï¿½n Findus;4,75;El Kilo;menestraseleccion.jpg
 Verduras;Patata En Dados;2,6;El Kilo;patatadado.jpg
 Verduras;Pimiento Rojo Troceado;4,75;El Kilo;pimientorojo.webp
 Verduras;Pimiento Verde Troceado;4,6;El Kilo;pimientoverde.webp
@@ -39,26 +39,26 @@ Salteados y Revueltos;Salteado de Pavo;6,8;El Kilo;
 Salteados y Revueltos;Salteado de Pollo;5,4;El Kilo;
 Salteados y Revueltos;Salteado Setas con Verduras;6,4;El Kilo;
 Precocinados;Albodigas de Pollo;8,25;El Kilo;
-Precocinados;Albondigas de  carrillera, Jamón y Setas;17,1;El Kilo;
+Precocinados;Albondigas de  carrillera, Jamï¿½n y Setas;17,1;El Kilo;
 Precocinados;Albondigas de Choco y Gambas;16,5;El Kilo;
 Precocinados;Albondigas de Ternera;9,9;El Kilo;
 Precocinados;Escalope Pollo Ajo y Perejil;16,2;El Kilo;
 Precocinados;Finger Pollo Marinado;16,5;El Kilo;caprichopollo.JPG
 Precocinados;Finger Pollo Marinado Crujiente;12,95;El Kilo;fingerpollo.JPG
-Precocinados;Flamenquin de Carne y Jamón;13,4;El Kilo;
-Precocinados;Flamenquin de Jamón y Roquefort;13,4;El Kilo;
+Precocinados;Flamenquin de Carne y Jamï¿½n;13,4;El Kilo;
+Precocinados;Flamenquin de Jamï¿½n y Roquefort;13,4;El Kilo;
 Precocinados;Flamenquin Queso y Bacon;10,6;El Kilo;
 Precocinados;Lagrimitas de Pollo;10,95;El Kilo;lagrimita.JPG
 Precocinados;Lagrimitas de Pollo Artesanas;14,2;El Kilo;lagrimitaartesana.jpg
-Precocinados;Mini Flamenquin Jamón y Queso;6,8;El Kilo;miniflamenquin.jpg
-Precocinados;Mini San Jacobos Jamón y Queso;6,2;El Kilo;
-Precocinados;Mini San Jacobos Jamón y Queso;6,2;El Kilo;
+Precocinados;Mini Flamenquin Jamï¿½n y Queso;6,8;El Kilo;miniflamenquin.jpg
+Precocinados;Mini San Jacobos Jamï¿½n y Queso;6,2;El Kilo;
+Precocinados;Mini San Jacobos Jamï¿½n y Queso;6,2;El Kilo;
 Precocinados;Nugets de Pollo;15,2;El Kilo;nugetspollo.jpg
 Precocinados;Palomitas de Pollo;17,9;El Kilo;palomitaspollo.jpg
 Precocinados;Pechuga Rellena Quseo Cheddar y Bacon;11,6;El Kilo;pechugarellena cheddar y bacon.jpg
-Precocinados;Pechuga Rellena Jamón y Pimiento;11,5;El Kilo;pechugapimiento.jpg
-Precocinados;Pechuga Rellena Jamón y Queso;11,5;El Kilo;LARA-PECHUGA-JAMON-Y-QUESO.jpg
-Precocinados;Pechuga Rellena Jamón y Roquefort;11,5;El Kilo;
+Precocinados;Pechuga Rellena Jamï¿½n y Pimiento;11,5;El Kilo;pechugapimiento.jpg
+Precocinados;Pechuga Rellena Jamï¿½n y Queso;11,5;El Kilo;LARA-PECHUGA-JAMON-Y-QUESO.jpg
+Precocinados;Pechuga Rellena Jamï¿½n y Roquefort;11,5;El Kilo;
 Precocinados;Pollo Cajun;8,95;El Kilo;
 Precocinados;Pollo Kentucky;20,9;El Kilo;kentucky.jpg
 Precocinados;Empanadillas;6,2;El Kilo;
@@ -73,9 +73,9 @@ Precocinados;Croquetas de Carrillera al Pedro Ximenez;17,95;El Kilo;croqcarrille
 Precocinados;Croquetas de Chorizo Iberico;17,8;El Kilo;chorizoiberico.jpg
 Precocinados;Croquetas de Cocido (Puchero);14,9;El Kilo;crpqcocido.jpg
 Precocinados;Croquetas de Espinacas y Queso Cabra;13.95;El Kilo;espinacayqueso.webp
-Precocinados;Croquetas de Espinacas, Pasas y Piñones;6,8;El Kilo;
+Precocinados;Croquetas de Espinacas, Pasas y Piï¿½ones;6,8;El Kilo;
 Precocinados;Croquetas de Gambas al Ajillo;16,9;El Kilo;
-Precocinados;Croquetas de Jamón Iberico;8,95;El Kilo;jamoniberico.jpg
+Precocinados;Croquetas de Jamï¿½n Iberico;8,95;El Kilo;jamoniberico.jpg
 Precocinados;Croquetas de Pinchito Moruno;12,95;El Kilo;
 Precocinados;Croquetas de Pollo;8,2;El Kilo;croqpollo.jpg
 Precocinados;Croquetas de Pollo Asado;10,95;El Kilo;
@@ -83,12 +83,12 @@ Precocinados;Croquetas de Secreto Cerdo y Miel;15,95;El Kilo;secretoymiel.jpg
 Precocinados;Croquetas de Setas;10,6;El Kilo;croqsetas.jpg
 Precocinados;Croquetas de Verduras asadas y Queso de Cabra;13,4;El Kilo;croqverduraasada.jpg
 Precocinados;Mini Croquetas de Cocido (Puchero);13,95;El Kilo;croqminicocido.jpg
-Precocinados;Mini Croquetas de Jamón (Mahesitos);6,95;El Kilo;minijamon.jpg
+Precocinados;Mini Croquetas de Jamï¿½n (Mahesitos);6,95;El Kilo;minijamon.jpg
 Precocinados;Mini Croquetas de Pollo;6,5;El Kilo;croqminipollo.jpg
-Precocinados;Adobo Caella (Cazón);12,4;El Kilo;adobocaella.jpg
+Precocinados;Adobo Caella (Cazï¿½n);12,4;El Kilo;adobocaella.jpg
 Precocinados;Bacalao Rebozado;9,8;El Kilo;
 Precocinados;Boquerones en Tempura;13,9;El Kilo;
-Precocinados;Buñuelos de Bacalao;6,95;El Kilo;buñuelosbacalao.webp
+Precocinados;Buï¿½uelos de Bacalao;6,95;El Kilo;buï¿½uelosbacalao.webp
 Precocinados;Caprichos de Calamar;6,9;El Kilo;caprichocalamar.jpg
 Precocinados;Chocos Enharinados;17,4;El Kilo;
 Precocinados;Filetes de Merluza Rebozados;11,2;El Kilo;fileterebozadomerluza.JPG
@@ -125,9 +125,9 @@ Precocinados;Patatas Corte Normal;2,85;El Kilo;
 Precocinados;Patatas Corte Ondulado;3,75;El Kilo;
 Precocinados;Patatas Corte Rodajas (Dolar) Mcain;3,8;El Kilo;
 Pescados  Y mariscos;Anillas de Calamar;11.20;El Kilo;
-Pescados  Y mariscos;Atún en Taquitos;13,2;El Kilo;
-Pescados  Y mariscos;Chipirón Limpio 10-20 piezas kilo;11.95;El Kilo;
-Pescados  Y mariscos;Chipirón Sucio;Sin Stock;;
+Pescados  Y mariscos;Atï¿½n en Taquitos;13,2;El Kilo;
+Pescados  Y mariscos;Chipirï¿½n Limpio 10-20 piezas kilo;11.95;El Kilo;
+Pescados  Y mariscos;Chipirï¿½n Sucio;Sin Stock;;
 Pescados  Y mariscos;Choco Entero Limpio;Sin Stock;;
 Pescados  Y mariscos;tiras de Poton (Choco);11.95;El Kilo;
 Pescados  Y mariscos;Merluza Filetes (250gr aprox. la pieza);13.50;El Kilo;
@@ -138,28 +138,28 @@ Pescados  Y mariscos;Bacalao Lomos;15,95;El Kilo;
 Pescados  Y mariscos;Bacalao Trozos;9.90;El Kilo;
 Pescados  Y mariscos;Caella Taquitos;8.95;El Kilo;
 Pescados  Y mariscos;Gambas Peladas Extra;16,4;El Kilo;
-Pescados  Y mariscos;Gamba Pelada Pequeñas;10.80;El Kilo;
+Pescados  Y mariscos;Gamba Pelada Pequeï¿½as;10.80;El Kilo;
 Pescados  Y mariscos;Almejas Blancas (pacifico);3.99;El Kilo;
 Pescados  Y mariscos;Almejas Marrones (pacifico);5.40;El Kilo;
-Pescados  Y mariscos;Salmón Colas;9.90;El Kilo;
-Pescados  Y mariscos;Salmón Porciones;11.95;El Kilo;
+Pescados  Y mariscos;Salmï¿½n Colas;9.90;El Kilo;
+Pescados  Y mariscos;Salmï¿½n Porciones;11.95;El Kilo;
 Pescados  Y mariscos;Pez Espada Lomo;16,95;El kilo;
 Pescados  Y mariscos;Preparado Paella (Con verduras);11,95;El kilo;
 Pescados  Y mariscos;Preparado Paella (Sin verduras);11,95;El kilo;
 Pescados  Y mariscos;Palitos de Cangrejo Extra;12,2;El kilo;
-Pescados  Y mariscos;Mejillón Carne (Cocido) pequeño;;;
+Pescados  Y mariscos;Mejillï¿½n Carne (Cocido) pequeï¿½o;;;
 Pescados  Y mariscos;Tilapia Filetes;8,5;El Kilo;tilapia.webp
 Estuchados;Base Pizza;2,5;3 Unidades;
-Estuchados;Canelón Carne;1,95;Unidad;caneloncarne.jpg
-Estuchados;Canelón de Atún;3,75;Unidad;canelonatun.jpg
+Estuchados;Canelï¿½n Carne;1,95;Unidad;caneloncarne.jpg
+Estuchados;Canelï¿½n de Atï¿½n;3,75;Unidad;canelonatun.jpg
 Estuchados;Churros de Lazo;1.95;Paq.500gr;churros.jpg
 Estuchados;Hamburguesa Buey ;3,75;Unidad de 200gr;
 Estuchados;Hamburguesa Pollo;1,6;Paq 3 Unidades;
 Estuchados;Hamburguesa Ternera ;3,5;Paq. 2 Unidades;
 Estuchados;Krispy Chiken 1 Unid;1,35;Unidad;
-Estuchados;Lasaña atún;3,75;Unidad;lasañaatun.jpg
-Estuchados;Lasañaa Carne;1,95;Unidad;
-Estuchados;lasaña 4 Quesos;2,95;Unidad;lasaña4quesos.jpg
+Estuchados;Lasaï¿½a atï¿½n;3,75;Unidad;lasaï¿½aatun.jpg
+Estuchados;Lasaï¿½aa Carne;1,95;Unidad;
+Estuchados;lasaï¿½a 4 Quesos;2,95;Unidad;lasaï¿½a4quesos.jpg
 Estuchados;mussaka;3,75;Unidad;mussaka.jpg
 Estuchados;Palito Cangrejo;1,6;Paq. 250gr.;
 Estuchados;San Jacobo;2,1;Paq. 4 Unidades;
