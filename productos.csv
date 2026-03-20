@@ -93,11 +93,12 @@ Precocinados;Gambas Rebozadas;15,2;El Kilo;gambasrebozadas.jpg
 Precocinados;Mejillon Tigre;10,8;El Kilo;mejillonrelleno.jpg
 Precocinados;Muslitos de Cangrejo;10,8;El Kilo;muslitocangrejo.jpeg
 Precocinados;Palitos de Merluza;8,25;El Kilo;palitosdemerluza.jpg
-Precocinados;Pavias de Merluza;15,5;El Kilo;paviamerluza.jpg
+Precocinados;Pavias de Merluza;15,5;El Kilo;paviademerluza.jpg
 Precocinados;Porciones de Merluza;10,95;El Kilo;porcionesdemerluza.jpg
 Precocinados;Varitas de Merluza;11,2;El Kilo;varitasdemerluza.webp
 Precocinados;Filetes de Merluza Rebozados;11,2;El Kilo;filetemerluzarebozado.jpg
 Estuchados;Tortita de Camarones;0,7;La Unidad;tortitacamarones.jpg
+Precocinados;Twister de Langostino;29,9;El Kilo;twister-de-langostino.jpg
 Precocinados;Aros de Cebolla Rebozados;7,2;El Kilo;aroscebolla.jpg
 Precocinados;Berenjenas Rebozadas;7,6;El Kilo;berenjenarebozada.jpg
 Precocinados;Calabacin Rebozado;5,8;El Kilo;calabacinrebozado.jpg
@@ -107,7 +108,6 @@ Precocinados;Aros de Queso Gouda;15,5;El Kilo;quesogouda.jpg
 Precocinados;Bocadito Queso Camenbert;17,5;El Kilo;camentberd.jpeg.jpeg
 Precocinados;Bocaditos de Queso;8,99;El Kilo;bocaditosqueso.jpg
 Precocinados;Bocaditos de Queso Cabrales;6,95;El Kilo;cabrales.jpeg.jpeg
-Precocinados;Bocaditos de Queso Philadelphia;14,4;El Kilo;
 Precocinados;Empanadillas de queso;11,6;El Kilo;empanadillaqueso.jpeg.jpeg
 Precocinados;Gratin de Patata y Queso;10,95;El Kilo;gratin.jpeg.jpeg
 Precocinados;Palitos de Mozzarella;12,95;El Kilo;mozzarella.jpeg.jpeg
@@ -132,9 +132,8 @@ Pescados  Y mariscos;Merluza Filetes (250gr aprox. la pieza);12,95;El Kilo;merlu
 Pescados  Y mariscos;Merluza Suprema Sin Piel;12.95;El Kilo;supremamerluza.jpeg
 Pescados  Y mariscos;Merluza Lomos;21,9;El Kilo;lomomerluza.jpeg
 Pescados  Y mariscos;Merluza Rodajas;13,5;El Kilo;rodajamerluza.JPG
-Pescados  Y mariscos;Bacalao Colas;14,5;El Kilo;
-Pescados  Y mariscos;Bacalao Lomos;16,95;El Kilo;
-Pescados  Y mariscos;Bacalao Trozos;13,95;El Kilo;
+Pescados  Y mariscos;Bacalao Colas;14,5;El Kilo;bacalaocolas.jpg
+Pescados  Y mariscos;Bacalao Lomos;16,95;El Kilo;Bacalao-lomos.jpg
 Pescados  Y mariscos;Maruca Porciones;12,95;El Kilo;marucaporciones.jpeg
 Pescados  Y mariscos;Maruca Lomos;17,5;El Kilo;lomomaruca.jpeg
 Pescados  Y mariscos;Caella Taquitos;8,99;El Kilo;taquitocaella.jpeg
@@ -150,8 +149,8 @@ Pescados  Y mariscos;Preparado Paella (Sin verduras);11,95;El kilo;preppaellasin
 Pescados  Y mariscos;Palitos de Cangrejo Extra;12,2;El kilo;palitosextra.jpeg
 Pescados  Y mariscos;Mejillon Carne (Cocido) pequeño;9,2;El Kilo;carnemejillon.jpeg.jpeg
 Pescados  Y mariscos;Tilapia Filetes;7,5;El Kilo;tilapia.webp
-Estuchados;Bacalao Dorado;5,9;Unidad;
-Estuchados;Base Pizza;2,75;3 Unidades;
+Estuchados;Bacalao Dorado;5,9;Unidad;bacalao-dorado.jpg
+Estuchados;Base Pizza;2,75;3 Unidades;basepizza.jpg
 Estuchados;Canelon Carne;1,95;Unidad;caneloncarne.jpg
 Estuchados;Canelon de Atun;2,95;Unidad;canelonatun.jpg
 Estuchados;Churros de Lazo;1.95;Paq.500gr;churros.jpg
@@ -162,11 +161,10 @@ Estuchados;Hamburguesa Ternera ;3,5;Paq. 2 Unidades;ternera.jpg
 Estuchados;Hamburguesa Retinto;3,9;Unidad;retinto.jpg
 Estuchados;Hamburguesa Angus;3,65;Unidad;Angus.jpg
 Estuchados;Hamburguesa Buey ;3,5;Unidad de 200gr;buey.jpg
-;;;;
-Estuchados;Lasaña atun;3,75;Unidad;lasañaatun.jpg
-Estuchados;Lasaña Carne;1,95;Unidad;
+Estuchados;Lasaña atun;3,75;Unidad;lasanaatun.jpg
+Estuchados;Lasaña Boloñesa;1,95;Unidad;lasanacarne.jpg
 Estuchados;lasaña 4 Quesos;2,95;Unidad;lasana4quesos.jpg
-Estuchados;mussaka;3,75;Unidad;mussaka.jpg
-Estuchados;Palito Cangrejo;1,6;Paq. 250gr.;
-Estuchados;San Jacobo;2,2;Paq. 4 Unidades;
-Postres y Helados;churros;1,95;Paq.500gr.;
+Estuchados;Mussaka;3,75;Unidad;mussaka.jpg
+Estuchados;Palito Cangrejo;1,6;Paq. 250gr.;palitocangrejo.jpg
+Estuchados;San Jacobo;2,2;Paq. 4 Unidades;sanjacobo.jpeg
+Postres y Helados;Churros;1,95;Paq.500gr.;churros.jpg
