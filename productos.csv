@@ -10,7 +10,7 @@ Verduras;Champiñon Laminado;5,95;El Kilo;laminado.webp
 Verduras;Coles de Bruselas;4,4;El Kilo;colesdebruselas.webp
 Verduras;Coliflor;3,8;El Kilo;coliflor.webp
 Verduras;Espinacas en Porciones;3,4;El Kilo;espinacas.jpg
-Verduras;Ensaladilla;2,95;El Kilo;
+Verduras;Ensaladilla;2,95;El Kilo;ensaladilla.jpeg
 Verduras;Garbanzos pre-Cocidos;3,95;El Kilo;garbanzos.jpg
 Verduras;Guisante Fino Findus;4,2;El Kilo;guisantes-finos.jpg
 Verduras;Habas Baby;6,8;El Kilo;habasbaby.jpg
@@ -91,7 +91,7 @@ Precocinados;Chocos Enharinados;17,4;El Kilo;chocoenharinado.jpg
 Precocinados;Rabas de Calamar empanadas;;El Kilo;rabacalamar.jpeg
 Precocinados;Gambas Rebozadas;15,2;El Kilo;gambasrebozadas.jpg
 Precocinados;Mejillon Tigre;10,8;El Kilo;mejillonrelleno.jpg
-Precocinados;Muslitos de Cangrejo;10,8;El Kilo;
+Precocinados;Muslitos de Cangrejo;10,8;El Kilo;muslitocangrejo.jpeg
 Precocinados;Palitos de Merluza;8,25;El Kilo;palitosdemerluza.jpg
 Precocinados;Pavias de Merluza;15,5;El Kilo;paviamerluza.jpg
 Precocinados;Porciones de Merluza;10,95;El Kilo;porcionesdemerluza.jpg
@@ -122,32 +122,32 @@ Precocinados;Patatas Corte Grueso (Steak House) Mcain;3,8;El Kilo;cortegrueso.jp
 Precocinados;Patatas Corte Rodajas (Dolar) Mcain;3,95;El Kilo;cortedolar.jpg
 Precocinados;Patatas Bravas (Mcain);3,95;El Kilo;bravas.jpg
 Precocinados;Patatas Gajo y Especies (Lux);4,25;El Kilo;patatalux.jpg
-Pescados  Y mariscos;Acedias;13,95;El kilo;
+Pescados  Y mariscos;Acedias;13,95;El kilo;acedias.jpeg
 Pescados  Y mariscos;Anillas de Calamar;11.20;El Kilo;anillacalamar.jpeg.jpeg
-Pescados  Y mariscos;Tubo de Pota;12,5;El Kilo;
+Pescados  Y mariscos;Tubo de Pota;12,5;El Kilo;tubodepota.jpeg
 Pescados  Y mariscos;Atun en Taquitos;13,2;El Kilo;
 Pescados  Y mariscos;Chipiron Limpio 10-20 piezas kilo;14,95;El Kilo;chipironlimpio.jpeg.jpeg
-Pescados  Y mariscos;tiras de Poton (Choco);9,9;El Kilo;
+Pescados  Y mariscos;tiras de Poton (Choco);9,9;El Kilo;poton.jpeg
 Pescados  Y mariscos;Merluza Filetes (250gr aprox. la pieza);12,95;El Kilo;
-Pescados  Y mariscos;Merluza Suprema Sin Piel;12.95;El Kilo;
-Pescados  Y mariscos;Merluza Lomos;21,9;El Kilo;
+Pescados  Y mariscos;Merluza Suprema Sin Piel;12.95;El Kilo;supremamerluza.jpeg
+Pescados  Y mariscos;Merluza Lomos;21,9;El Kilo;lomomerluza.jpeg
 Pescados  Y mariscos;Merluza Rodajas;13,5;El Kilo;rodajamerluza.JPG
 Pescados  Y mariscos;Bacalao Colas;14,5;El Kilo;
 Pescados  Y mariscos;Bacalao Lomos;16,95;El Kilo;
 Pescados  Y mariscos;Bacalao Trozos;13,95;El Kilo;
-Pescados  Y mariscos;Maruca Porciones;12,95;El Kilo;
-Pescados  Y mariscos;Maruca Lomos;17,5;El Kilo;
-Pescados  Y mariscos;Caella Taquitos;8,99;El Kilo;
-Pescados  Y mariscos;Gambas Peladas 10-30 piezas;16,4;El Kilo;
+Pescados  Y mariscos;Maruca Porciones;12,95;El Kilo;marucaporciones.jpeg
+Pescados  Y mariscos;Maruca Lomos;17,5;El Kilo;lomomaruca.jpeg
+Pescados  Y mariscos;Caella Taquitos;8,99;El Kilo;taquitocaella.jpeg
+Pescados  Y mariscos;Gambas Peladas 10-30 piezas;16,4;El Kilo;ganba10-30.jpeg
 Pescados  Y mariscos;Gamba Peladas 30-50 piezas;12,5;El Kilo;gambapelada30-50.jpeg.jpeg
-Pescados  Y mariscos;Almejas Blancas (pacifico);3.99;El Kilo;
-Pescados  Y mariscos;Almejas Marrones (pacifico);5,8;El Kilo;
-Pescados  Y mariscos;Salmon Colas;11,95;El Kilo;
-Pescados  Y mariscos;Salmon Porciones;12,95;El Kilo;
+Pescados  Y mariscos;Almejas Blancas (pacifico);3.99;El Kilo;almejablanca.jpeg
+Pescados  Y mariscos;Almejas Marrones (pacifico);5,8;El Kilo;almejamarron.jpeg
+Pescados  Y mariscos;Salmon Colas;11,95;El Kilo;colasalmon.jpeg
+Pescados  Y mariscos;Salmon Porciones;12,95;El Kilo;porcionsalmon.jpeg
 Pescados  Y mariscos;Pez Espada Lomo;18,95;El kilo;pezespada.jpeg.jpeg
-Pescados  Y mariscos;Preparado Paella (Con verduras);11,95;El kilo;
-Pescados  Y mariscos;Preparado Paella (Sin verduras);11,95;El kilo;
-Pescados  Y mariscos;Palitos de Cangrejo Extra;12,2;El kilo;
+Pescados  Y mariscos;Preparado Paella (Con verduras);11,95;El kilo;preppaellaconverdura.jpeg
+Pescados  Y mariscos;Preparado Paella (Sin verduras);11,95;El kilo;preppaellasinverdura.jpeg
+Pescados  Y mariscos;Palitos de Cangrejo Extra;12,2;El kilo;palitosextra.jpeg
 Pescados  Y mariscos;Mejillon Carne (Cocido) pequeño;9,2;El Kilo;carnemejillon.jpeg.jpeg
 Pescados  Y mariscos;Tilapia Filetes;7,5;El Kilo;tilapia.webp
 Estuchados;Bacalao Dorado;5,9;Unidad;
